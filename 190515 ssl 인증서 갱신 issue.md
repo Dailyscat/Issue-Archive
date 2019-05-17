@@ -131,15 +131,10 @@ nginx의 server 블록에 location 블록을 만들고, let's encrypt에서 요�
  
  참고한 사이트:
  >https://letsencrypt.readthedocs.io/en/latest/using.html#renewing-certificates
- 
  >https://twpower.github.io/44-set-free-https-by-using-letsencrypt
- 
  >http://blog.kimgihong.com/devlog/AWS_EC2_letsencrypt_SSL
- 
  >https://doc.owncloud.com/server/admin_manual/installation/letsencrypt/nginx.html
- 
  >https://m.blog.naver.com/PostView.nhn?blogId=itperson&logNo=220853849351&proxyReferer=https%3A%2F%2Fwww.google.com%2F
- 
  >https://realsangil.github.io/2018/10/31/letsencrypt_wildcard_certification_renew#%ED%95%9C%EB%B2%88%EC%97%90-%EB%90%A0%EB%A6%AC%EA%B0%80-%EC%97%86%EC%A7%80
  
 </br>
