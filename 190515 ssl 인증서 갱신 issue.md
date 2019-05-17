@@ -9,25 +9,18 @@
 
 회사의 상황은 반년 이내에 aws로 migration이 예정되있던 상태라서 1년까지의 인증이 필요 없었으며, 개인적으로 Let's Encrypt는 무료이기 때문에 시간이 조금 더 걸리더라도 Let's Encrypt의 ssl 인증 방식을 택하기로 했다.
 
-회사의 상황은 ubuntu 16.04 server에 nginx를 사용하고, 그 안에서 경로를 설정하여 SSL인증을 거치는 방식이었다.
 
-
+아키텍쳐는 ubuntu 16.04 server에 nginx를 사용하고, 그 안에서 경로를 설정하여 SSL인증을 거치는 방식이었으며,
 [아웃사이더님의 포스팅](https://blog.outsider.ne.kr/1178)을 보고 따라하던 중 이 도메인이 사용하고 있는 도메인이 맞는지 확인하는 과정에서 문제가 생겼다.
-
-
-
 
 ## nginx의 server 블록에 location 블록을 만들고 let's encrypt에서 요청하는 경로를 설정하고 그 경로에 파일을 만들었는데 아무리 해도 그 경로를 인식하지를 못했다.
 
 
 * 첫번째 디버깅으로는 nginx의 location을 설정하는 방법(alias와 root)이 잘못되었나 하여 고쳐보았다.
 
-
 ex)
-참조한 사이트:
->http://kwonnam.pe.kr/wiki/nginx/location
 
-http://example.com/images/something/somepath/myfile.png 의 경로 요청일 때
+`http://example.com/images/something/somepath/myfile.png` 의 경로 요청일 때
 
 location /images/something/ {
     alias /var/www/something/;
@@ -41,12 +34,14 @@ location /images/something/ {
 
 => 실제 경로는 /var/www/something/images/something/somepath/myfile.png
 
+참조한 사이트:
+>http://kwonnam.pe.kr/wiki/nginx/location
 
-참조 사이트: 
->https://letsencrypt.org/docs/rate-limits/
 
 그런데 root, alias 둘 다 써보면서 각각의 경로로 설정해봐도 도통 요청을 제대로 받지를 못하고 404가 떴다. 더군다나 몇번 시도를 해보다가 이 제대로된 도메인인지를 확인하는 과정이 한시간에 5번인가의 제한이 있는걸 하다가 알게 되어서 중간 중간 쓸데 없는 시간을 보내게 됐다. 
 
+참조 사이트: 
+>https://letsencrypt.org/docs/rate-limits/
 
 
 
