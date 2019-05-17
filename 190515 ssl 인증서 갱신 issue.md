@@ -39,15 +39,18 @@ nginx의 server 블록에 location 블록을 만들고, let's encrypt에서 요�
 
             => 실제 경로는 /var/www/something/images/something/somepath/myfile.png
 
-        참조한 사이트:
-        >http://kwonnam.pe.kr/wiki/nginx/location
+참조한 사이트:
+
+>http://kwonnam.pe.kr/wiki/nginx/location
 
 </br>
 </br>
 그런데 root, alias 둘 다 써보면서 각각의 경로로 설정해봐도 도통 요청을 제대로 받지를 못하고 404가 떴다. 더군다나 몇번 시도를 해보다가 이 제대로된 도메인인지를 확인하는 과정이 한시간에 5번인가의 제한이 있는걸 하다가 알게 되어서 중간 중간 쓸데 없는 시간을 보내게 됐다. 
 
-    참조 사이트: 
-    >https://letsencrypt.org/docs/rate-limits/
+</br>
+참조 사이트:
+
+>https://letsencrypt.org/docs/rate-limits/
 
 
 
@@ -89,6 +92,9 @@ nginx의 server 블록에 location 블록을 만들고, let's encrypt에서 요�
 
 무엇보다 아웃사이더님의 블로그를 참조했을 때, 
 
+</br>
+</br>
+
 ``` 
 (1) nginx를 사용하기 때문에 추가적인 설정은 nginx에 개별적으로 넣어야 한다는 맥락에서 `letsencrypt-auto certonly --manual` 명령어로 실행을 했기 때문에 letsencrypt -auto의 renew 명령어를 실행할 수 없었다.
 (2) (1)와 같은 이유에서 갱신에 대한 포스트에서 갱신이 되질 않아서, 그냥 다시 재발급을 하는 로직을 따랐다.
@@ -100,6 +106,7 @@ nginx의 server 블록에 location 블록을 만들고, let's encrypt에서 요�
 경로 설정에 애를 먹었고, 삽질을 하다 결국 어찌어찌 인증은 했지만 갱신이 안된다는 부분을 보고 고민을 하다가 나중을 위하여 재 설정을 하기로 생각했다.
 
 참고한 사이트:
+
 >https://serverfault.com/questions/750902/how-to-use-lets-encrypt-dns-challenge-validation
 >https://community.letsencrypt.org/t/cant-renew-the-certification-with-error-an-authentication-script-must-be-provided-with->manual-auth-hook-when-using-the-manual-plugin-non-interactively/67216/2
 
@@ -111,6 +118,9 @@ nginx의 server 블록에 location 블록을 만들고, let's encrypt에서 요�
 
 
  **이유는** 
+ 
+</br>
+
    * 기존의 letsencrypt에서 만든 자동화툴
    * nginx에 대한 플러그인도 마련되어 있음
    * 명령어 한 줄로 갱신 자동화 가능
@@ -147,6 +157,7 @@ nginx의 server 블록에 location 블록을 만들고, let's encrypt에서 요�
  
  
  참조한 사이트:
+ 
  >https://swiftcoding.org/lets-encrypt-renew
  >https://swiftcoding.org/lets-encrypt-auto-renew
  >http://riseshia.github.io/2016/10/16/certbot-let-s-encrypt.html
