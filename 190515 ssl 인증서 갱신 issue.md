@@ -1,5 +1,4 @@
 # Issue: 회사 프로덕트의 ssl인증 갱신이 필요한 상황
-
 </br>
 해결 방법은 두가지가 있었다.
 
@@ -125,7 +124,8 @@ nginx의 server 블록에 location 블록을 만들고, let's encrypt에서 요�
  >https://m.blog.naver.com/PostView.nhn?blogId=itperson&logNo=220853849351&proxyReferer=https%3A%2F%2Fwww.google.com%2F
  >https://realsangil.github.io/2018/10/31/letsencrypt_wildcard_certification_renew#%ED%95%9C%EB%B2%88%EC%97%90-%EB%90%A0%EB%A6%AC%EA%B0%80-%EC%97%86%EC%A7%80
  
-
+</br>
+</br>
 
  [twpower라는 블로그](https://letsencrypt.readthedocs.io/en/latest/using.html#renewing-certificates)의 프로세스를 참고했고, 정말 얼마 걸리지 않게 쉽게 인증을 받을 수 있었다.......
 
@@ -135,7 +135,7 @@ nginx의 server 블록에 location 블록을 만들고, let's encrypt에서 요�
  
  같은 기능을 하지만 certbot이란 이름으로 바뀌게 된것이고, 인터넷에 letsencrypt로 되어있는 문서의 역할을 동일하게 할 수 있으니 참조할 수 있다.
  
- ##갱신
+ ## 갱신
  
  
  **0 14,19 1 * * /절대경로/letsencrypt-auto renew --quiet --no-self-upgrade --post-hook "/절대경로/service nginx restart"**
