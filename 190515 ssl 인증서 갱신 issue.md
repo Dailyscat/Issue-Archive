@@ -13,24 +13,25 @@
 아키텍쳐는 ubuntu 16.04 server에 nginx를 사용하고, 그 안에서 경로를 설정하여 SSL인증을 거치는 방식이었으며,
 [아웃사이더님의 포스팅](https://blog.outsider.ne.kr/1178)을 보고 따라하던 중 이 도메인이 사용하고 있는 도메인이 맞는지 확인하는 과정에서 문제가 생겼다.
 
-## nginx의 server 블록에 location 블록을 만들고 let's encrypt에서 요청하는 경로를 설정하고 그 경로에 파일을 만들었는데 아무리 해도 그 경로를 인식하지를 못했다.
+
+nginx의 server 블록에 location 블록을 만들고, let's encrypt에서 요청하는 경로를 설정하고 그 경로에 파일을 만들었는데 아무리 해도 그 경로를 인식하지를 못했다.
 
 
 * 첫번째 디버깅으로는 nginx의 location을 설정하는 방법(alias와 root)이 잘못되었나 하여 고쳐보았다.
 
-ex)
+    ex)
 
-`http://example.com/images/something/somepath/myfile.png` 의 경로 요청일 때
+    `http://example.com/images/something/somepath/myfile.png` 의 경로 요청일 때
 
-location /images/something/ {
-    alias /var/www/something/;
-}
+    location /images/something/ {
+        alias /var/www/something/;
+    }
 
-=> 실제 경로는 /var/www/something/sompath/myfile.png
+    => 실제 경로는 /var/www/something/sompath/myfile.png
 
-location /images/something/ {
-    root /var/www/something/;
-}
+    location /images/something/ {
+        root /var/www/something/;
+    }
 
 => 실제 경로는 /var/www/something/images/something/somepath/myfile.png
 
