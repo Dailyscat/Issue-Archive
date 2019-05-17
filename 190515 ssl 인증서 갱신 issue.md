@@ -60,21 +60,18 @@
 </br>
 </br>
 
-    ```
+   
     (1) meteor를 빌드하여 생긴 build 폴더내부에 certbot에서 요청을 보내는 경로를 사용하여 nginx에 위에서 했던 방법으로 경로를 설정한다. 
     이 방법은 meteor의 특성상 어떤 source의 요청이 왔을 때, public 폴더로 가서 찾게 되는 방식을 이용하려고 한건데, 이미 build된 폴더 내부에서는 public를 새로 만들어줘도 가지를 않았다. 
 
     (2) 애초에 빌드 전 public폴더 내부에 요청이 온 경로에 해당하는 폴더와 파일을 만들고 빌드한다.
     이 방법으로 해당하는 루트에서 파일을 확인할 수 있게 됐다.
-    ```
 
 </br>
 </br>
 
 인증프로세스 후, 만들어 지는 파일 중 두가지만 경로 설정을 해도 실행은 되는데 보안을 위해서 세번째 dhparam.pem 2048 파일도 설정하여 비트 암호화를 했다.
-
 이 과정을 끝으로 ssl 설정을 마무리 했고, 1~2분 정도 지나고 브라우저 단에서도 ssl 인증이 확인됐다. 그리고 프로덕트는 약 90일간의 인증 기간을 받게 되었다.
-
 물론 메일로 갱신기간에 대해 알림이 오지만 90일 이라는 기간이 너무 짧아서 조금 더 찾아보니 crontab을 이용하여 갱신의 자동화를 이용할 수 있는 기능이 있어서 찾아보았다.
 
 </br>
@@ -87,13 +84,10 @@
 
 ----
 
-</br>
-</br>
-
+<br/>
 
 무엇보다 아웃사이더님의 블로그를 참조했을 때, 
 
-</br>
 </br>
 
 ``` 
@@ -106,17 +100,19 @@
 
 경로 설정에 애를 먹었고, 삽질을 하다 결국 어찌어찌 인증은 했지만 갱신이 안된다는 부분을 보고 고민을 하다가 나중을 위하여 재 설정을 하기로 생각했다.
 
-참고한 사이트:
+<br/>
+
+참고:
 
 >https://serverfault.com/questions/750902/how-to-use-lets-encrypt-dns-challenge-validation
 >https://community.letsencrypt.org/t/cant-renew-the-certification-with-error-an-authentication-script-must-be-provided-with->manual-auth-hook-when-using-the-manual-plugin-non-interactively/67216/2
 
-
-
+<br/>
+<br/>
 
 ## 검색을 해보다가 letsencrypt에서 만든 자동화 툴인 certbot을 사용하자고 맘을 먹었다.
 
-
+<br/>
 
  **이유는** 
  
