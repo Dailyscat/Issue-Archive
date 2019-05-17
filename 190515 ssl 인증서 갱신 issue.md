@@ -17,45 +17,44 @@
 nginx의 server 블록에 location 블록을 만들고, let's encrypt에서 요청하는 경로를 설정하고 그 경로에 파일을 만들었는데 아무리 해도 그 경로를 인식하지를 못했다.
 
 
-* 첫번째 디버깅으로는 nginx의 location을 설정하는 방법(alias와 root)이 잘못되었나 하여 고쳐보았다.
+    * 첫번째 디버깅으로는 nginx의 location을 설정하는 방법(alias와 root)이 잘못되었나 하여 고쳐보았다.
 
-    ex)
+        ex)
+            `http://example.com/images/something/somepath/myfile.png` 의 경로 요청일 때
 
-    `http://example.com/images/something/somepath/myfile.png` 의 경로 요청일 때
+            location /images/something/ {
+                alias /var/www/something/;
+            }
 
-    location /images/something/ {
-        alias /var/www/something/;
-    }
+            => 실제 경로는 /var/www/something/sompath/myfile.png
 
-    => 실제 경로는 /var/www/something/sompath/myfile.png
+            location /images/something/ {
+                root /var/www/something/;
+            }
 
-    location /images/something/ {
-        root /var/www/something/;
-    }
+            => 실제 경로는 /var/www/something/images/something/somepath/myfile.png
 
-=> 실제 경로는 /var/www/something/images/something/somepath/myfile.png
-
-참조한 사이트:
->http://kwonnam.pe.kr/wiki/nginx/location
+        참조한 사이트:
+        >http://kwonnam.pe.kr/wiki/nginx/location
 
 
 그런데 root, alias 둘 다 써보면서 각각의 경로로 설정해봐도 도통 요청을 제대로 받지를 못하고 404가 떴다. 더군다나 몇번 시도를 해보다가 이 제대로된 도메인인지를 확인하는 과정이 한시간에 5번인가의 제한이 있는걸 하다가 알게 되어서 중간 중간 쓸데 없는 시간을 보내게 됐다. 
 
-참조 사이트: 
->https://letsencrypt.org/docs/rate-limits/
+    참조 사이트: 
+    >https://letsencrypt.org/docs/rate-limits/
 
 
 
 ## 어쨌든 계속 시도를 해보다가 현재는 적절한 도메인임을 인증하는게 중요하다고 생각되어서 생각을 바꿔서 다른 시도를 해보기로 했다.
 
 
-```
-(1) meteor를 빌드하여 생긴 build 폴더내부에 certbot에서 요청을 보내는 경로를 사용하여 nginx에 위에서 했던 방법으로 경로를 설정한다. 
-이 방법은 meteor의 특성상 어떤 source의 요청이 왔을 때, public 폴더로 가서 찾게 되는 방식을 이용하려고 한건데, 이미 build된 폴더 내부에서는 public를 새로 만들어줘도 가지를 않았다. 
+    ```
+    (1) meteor를 빌드하여 생긴 build 폴더내부에 certbot에서 요청을 보내는 경로를 사용하여 nginx에 위에서 했던 방법으로 경로를 설정한다. 
+    이 방법은 meteor의 특성상 어떤 source의 요청이 왔을 때, public 폴더로 가서 찾게 되는 방식을 이용하려고 한건데, 이미 build된 폴더 내부에서는 public를 새로 만들어줘도 가지를 않았다. 
 
-(2) 애초에 빌드 전 public폴더 내부에 요청이 온 경로에 해당하는 폴더와 파일을 만들고 빌드한다.
-이 방법으로 해당하는 루트에서 파일을 확인할 수 있게 됐다.
-```
+    (2) 애초에 빌드 전 public폴더 내부에 요청이 온 경로에 해당하는 폴더와 파일을 만들고 빌드한다.
+    이 방법으로 해당하는 루트에서 파일을 확인할 수 있게 됐다.
+    ```
 
 인증프로세스 후, 만들어 지는 파일 중 두가지만 경로 설정을 해도 실행은 되는데 보안을 위해서 세번째 dhparam.pem 2048 파일도 설정하여 비트 암호화를 했다.
 
