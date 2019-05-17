@@ -6,18 +6,20 @@
 (1) comodo라는 회사의 1년짜리 ssl인증을 받아 갱신한다
 (2) Let's Encrypt라는 비영리 단체의 90일 짜리 ssl 인증을 받아 갱신한다.
 ```
+</br>
+</br>
 
 회사의 상황은 반년 이내에 aws로 migration이 예정되있던 상태라서 1년까지의 인증이 필요 없었으며, 개인적으로 Let's Encrypt는 무료이기 때문에 시간이 조금 더 걸리더라도 Let's Encrypt의 ssl 인증 방식을 택하기로 했다.
-
-
+</br>
 아키텍쳐는 ubuntu 16.04 server에 nginx를 사용하고, 그 안에서 경로를 설정하여 SSL인증을 거치는 방식이었으며,
 [아웃사이더님의 포스팅](https://blog.outsider.ne.kr/1178)을 보고 따라하던 중 이 도메인이 사용하고 있는 도메인이 맞는지 확인하는 과정에서 문제가 생겼다.
 
-
+</br>
+</br>
 nginx의 server 블록에 location 블록을 만들고, let's encrypt에서 요청하는 경로를 설정하고 그 경로에 파일을 만들었는데 아무리 해도 그 경로를 인식하지를 못했다.
 
 
-    * 첫번째 디버깅으로는 nginx의 location을 설정하는 방법(alias와 root)이 잘못되었나 하여 고쳐보았다.
+* 첫번째 디버깅으로는 nginx의 location을 설정하는 방법(alias와 root)이 잘못되었나 하여 고쳐보았다.
 
         ex)
             `http://example.com/images/something/somepath/myfile.png` 의 경로 요청일 때
@@ -61,6 +63,7 @@ nginx의 server 블록에 location 블록을 만들고, let's encrypt에서 요�
 이 과정을 끝으로 ssl 설정을 마무리 했고, 1~2분 정도 지나고 브라우저 단에서도 ssl 인증이 확인됐다. 그리고 프로덕트는 약 90일간의 인증 기간을 받게 되었다.
 
 물론 메일로 갱신기간에 대해 알림이 오지만 90일 이라는 기간이 너무 짧아서 조금 더 찾아보니 crontab을 이용하여 갱신의 자동화를 이용할 수 있는 기능이 있어서 찾아보았다.
+
 
 **그런데 나 같은 경우 meteor 내부에 적절한 도메인인지에 대한 내용을 작성한 뒤에 빌드를 해서 요청을 받아야 하는 script를 넣어줘야 자동화가 될 수 있는데, 그 과정이 꽤나 번거로왔다.**
 
