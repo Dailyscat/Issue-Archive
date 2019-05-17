@@ -16,7 +16,6 @@
 
 ## nginx의 server 블록에 location 블록을 만들고 let's encrypt에서 요청하는 경로를 설정하고 그 경로에 파일을 만들었는데 아무리 해도 그 경로를 인식하지를 못했다.
 
-----
 
 * 첫번째 디버깅으로는 nginx의 location을 설정하는 방법(alias와 root)이 잘못되었나 하여 고쳐보았다.
 
@@ -48,7 +47,6 @@ location /images/something/ {
 
 ## 어쨌든 계속 시도를 해보다가 현재는 적절한 도메인임을 인증하는게 중요하다고 생각되어서 생각을 바꿔서 다른 시도를 해보기로 했다.
 
-----
 
 ```
 (1) meteor를 빌드하여 생긴 build 폴더내부에 certbot에서 요청을 보내는 경로를 사용하여 nginx에 위에서 했던 방법으로 경로를 설정한다. 
@@ -86,8 +84,7 @@ location /images/something/ {
 
 ## 검색을 해보다가 letsencrypt에서 만든 자동화 툴인 certbot을 사용하자고 맘을 먹었다.
 
- ----
- 
+
  **이유는** 
    * 기존의 letsencrypt에서 만든 자동화툴
    * nginx에 대한 플러그인도 마련되어 있음
@@ -114,7 +111,6 @@ location /images/something/ {
  
  ##갱신
  
- ----
  
  **0 14,19 1 * * /절대경로/letsencrypt-auto renew --quiet --no-self-upgrade --post-hook "/절대경로/service nginx restart"**
  매달 1일 한국시간으로 11시와 새벽 4시에 인증서가 갱신될 수 있는 상태인지를 확인하고 그 후 nginx를 다시 시작하도록 crontab에 명령을 예약하여 주었다.
