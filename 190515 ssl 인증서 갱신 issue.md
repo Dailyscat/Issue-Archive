@@ -144,14 +144,19 @@
  
  ## 갱신
  
+ <br/>
+ <br/>
  
  **0 14,19 1 * * /절대경로/letsencrypt-auto renew --quiet --no-self-upgrade --post-hook "/절대경로/service nginx restart"**
  매달 1일 한국시간으로 11시와 새벽 4시에 인증서가 갱신될 수 있는 상태인지를 확인하고 그 후 nginx를 다시 시작하도록 crontab에 명령을 예약하여 주었다.
  
+ <br/>
+ 
  >--no-self-upgrade 플래그를 사용하면 Certbot이 사용자의 개입 없이 자체 업그레이드하지 않는다.위 옵션이 없으면 y/n 입력받기 위해 대기하다 끝난다.
  >--quiet : 로그 출력 안함
  
- 
+ <br/>
+ <br/>
  
  참조한 사이트:
  
