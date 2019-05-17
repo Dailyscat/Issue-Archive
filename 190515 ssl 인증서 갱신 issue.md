@@ -45,9 +45,12 @@ nginx의 server 블록에 location 블록을 만들고, let's encrypt에서 요�
 
 </br>
 </br>
+
 그런데 root, alias 둘 다 써보면서 각각의 경로로 설정해봐도 도통 요청을 제대로 받지를 못하고 404가 떴다. 더군다나 몇번 시도를 해보다가 이 제대로된 도메인인지를 확인하는 과정이 한시간에 5번인가의 제한이 있는걸 하다가 알게 되어서 중간 중간 쓸데 없는 시간을 보내게 됐다. 
 
 </br>
+</br>
+
 참조 사이트:
 
 >https://letsencrypt.org/docs/rate-limits/
