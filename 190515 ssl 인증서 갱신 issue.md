@@ -14,12 +14,13 @@
 
 [아웃사이더님의 포스팅](https://blog.outsider.ne.kr/1178)을 보고 따라하던 중 이 도메인이 사용하고 있는 도메인이 맞는지 확인하는 과정에서 문제가 생겼다.
 
+
+
 ## nginx의 server 블록에 location 블록을 만들고 let's encrypt에서 요청하는 경로를 설정하고 그 경로에 파일을 만들었는데 아무리 해도 그 경로를 인식하지를 못했다.
 
 
 * 첫번째 디버깅으로는 nginx의 location을 설정하는 방법(alias와 root)이 잘못되었나 하여 고쳐보았다.
 
----
 
 ex)
 참조한 사이트:
@@ -44,6 +45,9 @@ location /images/something/ {
 >https://letsencrypt.org/docs/rate-limits/
 
 그런데 root, alias 둘 다 써보면서 각각의 경로로 설정해봐도 도통 요청을 제대로 받지를 못하고 404가 떴다. 더군다나 몇번 시도를 해보다가 이 제대로된 도메인인지를 확인하는 과정이 한시간에 5번인가의 제한이 있는걸 하다가 알게 되어서 중간 중간 쓸데 없는 시간을 보내게 됐다. 
+
+
+
 
 ## 어쨌든 계속 시도를 해보다가 현재는 적절한 도메인임을 인증하는게 중요하다고 생각되어서 생각을 바꿔서 다른 시도를 해보기로 했다.
 
@@ -82,7 +86,11 @@ location /images/something/ {
 >https://serverfault.com/questions/750902/how-to-use-lets-encrypt-dns-challenge-validation
 >https://community.letsencrypt.org/t/cant-renew-the-certification-with-error-an-authentication-script-must-be-provided-with->manual-auth-hook-when-using-the-manual-plugin-non-interactively/67216/2
 
+
+
+
 ## 검색을 해보다가 letsencrypt에서 만든 자동화 툴인 certbot을 사용하자고 맘을 먹었다.
+
 
 
  **이유는** 
