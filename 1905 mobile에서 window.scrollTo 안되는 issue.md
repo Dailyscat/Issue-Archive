@@ -13,7 +13,7 @@ rules:
  (5) 방안은 ## 안의 과정은 ###
 -->
 
-# Issue: 
+# Issue: mobile에서 window.scrollTo가 되지 않는 오류
 
 ## 상황:
 
