@@ -1,12 +1,12 @@
-<!-- 
+<!--
 author: Dailyscat
 purpose: issue arrange
 rules:
- (1) 헤더와 문단사이 
+ (1) 헤더와 문단사이
     <br/>
     <br/>
  (2) 코드가 작성되는 부분은 >로 정리
- (3) 참조는 해당 내용 바로 아래 
+ (3) 참조는 해당 내용 바로 아래
     <br/>
     <br/>
  (4) 명령어는 bold
@@ -22,7 +22,7 @@ rules:
 <br/>
 
 ## 생각해낸 방안:
-+ ui library의 오류 
++ ui library의 오류
 + meteor를 모바일에서 사용할 때의 레거시 자체의 오류
 + scroll 자체의 오류
 
@@ -45,7 +45,7 @@ rules:
 
 ## 방안: scroll 자체의 오류 (성공)
 <br/>
-  
+
   레거시 코드 문제였다.
 
   desktop 랜딩에서의 css 설정을 mobile에서는 다르게 줘야 했는데, 따로 설정을 안하고 html, body에 둘다 overflow-x: hidden을 줘놓았다. overflow가 hidden이면 scrollTo가 작동하지 않기 때문에 안되고 있었던 것이다.
@@ -56,7 +56,7 @@ rules:
 <br/>
 <br/>
 
-        참조: 
+        참조:
         https://greensock.com/forums/topic/11336-html-overflow-hidden-preventing-javascript-scrolling-in-parallax-application/
 
 <br/>

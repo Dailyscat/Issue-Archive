@@ -1,12 +1,12 @@
-<!-- 
+<!--
 author: Dailyscat
 purpose: issue arrange
 rules:
- (1) 헤더와 문단사이 
+ (1) 헤더와 문단사이
     <br/>
     <br/>
  (2) 코드가 작성되는 부분은 >로 정리
- (3) 참조는 해당 내용 바로 아래 
+ (3) 참조는 해당 내용 바로 아래
     <br/>
     <br/>
  (4) 명령어는 bold
@@ -39,7 +39,7 @@ rules:
 
 ## 방안: Link 자체에 마련해 놓은 속성을 확인 (성공)
 <br/>
-  
+
 [react router 문서](https://reacttraining.com/react-router/web/api/Link/innerref-function)에 너무나 친절하게 innerRef: function이라는 속성을 소개하고 있다. 이전에 link의 state 값을 사용해서 이전에 보던 페이지로 돌아가는 기능을 구현해본 적이 있어서 바로 떠올릴 수 있었다!
 
 <br/>

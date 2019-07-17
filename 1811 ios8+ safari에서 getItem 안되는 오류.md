@@ -1,12 +1,12 @@
-<!-- 
+<!--
 author: Dailyscat
 purpose: issue arrange
 rules:
- (1) 헤더와 문단사이 
+ (1) 헤더와 문단사이
     <br/>
     <br/>
  (2) 코드가 작성되는 부분은 >로 정리
- (3) 참조는 해당 내용 바로 아래 
+ (3) 참조는 해당 내용 바로 아래
     <br/>
     <br/>
  (4) 명령어는 bold
@@ -15,7 +15,7 @@ rules:
 
 # Issue: ios8+ safari에서 getItem 안되는 오류
 
-## 상황: 
+## 상황:
 
 로그인 실패시에 에러가 발생하면 에러에 해당하는 부분에서 alert나 popcorn 메세지를 줬어야 하는데
 
@@ -30,7 +30,7 @@ rules:
 
 <br/>
 
-## 생각해낸 방안: 
+## 생각해낸 방안:
 + getItem의 safari 오류
 +
 
@@ -40,7 +40,7 @@ rules:
 
 ## 방안: getItem의 safari 오류 (성공)
 <br/>
-  
+
   이전에도 getItem을 사용하다가 safari에서 작동되지 않던 경험을 했던 적이 있었다.
 
   밑의 참조 글과 같이 ios8+ 이상부터 set, getItem 메소드를 제어할 수 없게 되었음을 알 수 있다.

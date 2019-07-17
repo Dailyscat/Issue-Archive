@@ -1,12 +1,12 @@
-<!-- 
+<!--
 author: Dailyscat
 purpose: issue arrange
 rules:
- (1) 헤더와 문단사이 
+ (1) 헤더와 문단사이
     <br/>
     <br/>
  (2) 코드가 작성되는 부분은 >로 정리
- (3) 참조는 해당 내용 바로 아래 
+ (3) 참조는 해당 내용 바로 아래
     <br/>
     <br/>
  (4) 명령어는 bold
@@ -30,7 +30,7 @@ rules:
 
 ## 방안: db를 참조하여 collection을 사용하는건 가능했지만 save되지 않았다.  (실패)
 <br/>
-  
+
     db.teacherprograms.find({}).map((cur) => {
         let requestedPrograms = db.requestprograms.find({"programId": cur._id}).toArray();
         if( requestedPrograms.length > 0 ) {

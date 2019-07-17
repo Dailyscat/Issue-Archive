@@ -1,12 +1,12 @@
-<!-- 
+<!--
 author: Dailyscat
 purpose: issue arrange
 rules:
- (1) 헤더와 문단사이 
+ (1) 헤더와 문단사이
     <br/>
     <br/>
  (2) 코드가 작성되는 부분은 >로 정리
- (3) 참조는 해당 내용 바로 아래 
+ (3) 참조는 해당 내용 바로 아래
     <br/>
     <br/>
  (4) 명령어는 bold
@@ -29,7 +29,7 @@ rules:
 
 ## 방안: html 구조와 css를 아예 새로 만들자. (성공)
 <br/>
-  
+
   <img src="./image/mobile의 slider ux 개선 전.gif">
   <img src="./image/mobile의 slider ux 개선 후.gif">
 
@@ -41,19 +41,19 @@ rules:
 
   이를 없애고 사이더를 마치 서랍을 여는 듯한 느낌으로 부드러움을 주려고 생각했다.
 
-  두번째 이미지를 보면 클릭했을 때 fadeIn과 faedOut의 느낌을 살려서 
+  두번째 이미지를 보면 클릭했을 때 fadeIn과 faedOut의 느낌을 살려서
   다시금 리퍼블리싱 한 것을 알 수 있다.
 
-  이전 코드는 <br> 
+  이전 코드는 <br>
     div <br>
     div <br>
     위 처럼 div 두개를 사용하여 <br>
     첫번 째 div에 transform: translateX( 100vw ); <br>
     두번 째 div에 transform: translateX( 200px ); <br>
-    이렇게 주고 transition이 없이 만들어서 
+    이렇게 주고 transition이 없이 만들어서
     각각이 state와 className을 이용하여 클릭할 때마다 새로 생기게 하여 깜짝깜짝 놀라는 ux를 만들었다.
 
-  개선 후 코드는 <br> 
+  개선 후 코드는 <br>
     div <br>
     &nbsp;&nbsp;&nbsp; div <br>
     &nbsp;&nbsp;&nbsp; div <br>

@@ -1,12 +1,12 @@
-<!-- 
+<!--
 author: Dailyscat
 purpose: issue arrange
 rules:
- (1) 헤더와 문단사이 
+ (1) 헤더와 문단사이
     <br/>
     <br/>
  (2) 코드가 작성되는 부분은 >로 정리
- (3) 참조는 해당 내용 바로 아래 
+ (3) 참조는 해당 내용 바로 아래
     <br/>
     <br/>
  (4) 명령어는 bold
@@ -30,13 +30,13 @@ rules:
 
 ## 방안: transition을 maxHeight에 사용하여 부드러운 닫기, 열기가 작동되도록 구성 (과정, 성공)
 <br/>
-  
+
    처음에는 min-height 속성을 사용하고 있었어서 min-height에 transition을 사용했었는데 max-height 속성으로 사용하게 됐다. 이유는
 
-    (1) content 자체의 height가 정해져 있었어야 했어서  
+    (1) content 자체의 height가 정해져 있었어야 했어서
     (2) min-height를 1000px로 줬을 때 어떤 액션이 일어났을 때 눈에 보이지 않아도 1000px까지 height가 늘어나는 부작용이 있었다.
 
-overflown 된 컨텐츠에 한해서 지켜져야 하는 height를 초기 max-height로 주고 
+overflown 된 컨텐츠에 한해서 지켜져야 하는 height를 초기 max-height로 주고
 
         .text {
           overflow: hidden;
