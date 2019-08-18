@@ -105,7 +105,7 @@
 참고:
 
 >https://serverfault.com/questions/750902/how-to-use-lets-encrypt-dns-challenge-validation
->https://community.letsencrypt.org/t/cant-renew-the-certification-with-error-an-authentication-script-must-be-provided-with->manual-auth-hook-when-using-the-manual-plugin-non-interactively/67216/2
+https://community.letsencrypt.org/t/cant-renew-the-certification-with-error-an-authentication-script-must-be-provided-with->manual-auth-hook-when-using-the-manual-plugin-non-interactively/67216/2
 
 <br/>
 <br/>
@@ -125,11 +125,11 @@
 
  참고한 사이트:
  >https://letsencrypt.readthedocs.io/en/latest/using.html#renewing-certificates
- >https://twpower.github.io/44-set-free-https-by-using-letsencrypt
- >http://blog.kimgihong.com/devlog/AWS_EC2_letsencrypt_SSL
- >https://doc.owncloud.com/server/admin_manual/installation/letsencrypt/nginx.html
- >https://m.blog.naver.com/PostView.nhn?blogId=itperson&logNo=220853849351&proxyReferer=https%3A%2F%2Fwww.google.com%2F
- >https://realsangil.github.io/2018/10/31/letsencrypt_wildcard_certification_renew#%ED%95%9C%EB%B2%88%EC%97%90-%EB%90%A0%EB%A6%AC%EA%B0%80-%EC%97%86%EC%A7%80
+ https://twpower.github.io/44-set-free-https-by-using-letsencrypt
+ http://blog.kimgihong.com/devlog/AWS_EC2_letsencrypt_SSL
+ https://doc.owncloud.com/server/admin_manual/installation/letsencrypt/nginx.html
+ https://m.blog.naver.com/PostView.nhn?blogId=itperson&logNo=220853849351&proxyReferer=https%3A%2F%2Fwww.google.com%2F
+ https://realsangil.github.io/2018/10/31/letsencrypt_wildcard_certification_renew#%ED%95%9C%EB%B2%88%EC%97%90-%EB%90%A0%EB%A6%AC%EA%B0%80-%EC%97%86%EC%A7%80
 
 </br>
 </br>
@@ -147,27 +147,25 @@
  <br/>
  <br/>
 
- **0 14,19 1 * * /절대경로/letsencrypt-auto renew --quiet --no-self-upgrade --post-hook "/절대경로/service nginx restart"**
- 매달 1일 한국시간으로 11시와 새벽 4시에 인증서가 갱신될 수 있는 상태인지를 확인하고 그 후 nginx를 다시 시작하도록 crontab에 명령을 예약하여 주었다.
+ **0 2,4 1 * * /절대경로/letsencrypt-auto renew --quiet --no-self-upgrade "/절대경로/service nginx restart"**
+ 매달 1일 한국시간으로  새벽 2시와 4시에 인증서가 갱신될 수 있는 상태인지를 확인하고 그 후 nginx를 다시 시작하도록 crontab에 명령을 예약하여 주었다.
 
  <br/>
 
  >--no-self-upgrade 플래그를 사용하면 Certbot이 사용자의 개입 없이 자체 업그레이드하지 않는다.위 옵션이 없으면 y/n 입력받기 위해 대기하다 끝난다.
- >--quiet : 로그 출력 안함
+ --quiet : 로그 출력 안함
 
  <br/>
  <br/>
 
  참조한 사이트:
 
- >https://swiftcoding.org/lets-encrypt-renew
- >https://swiftcoding.org/lets-encrypt-auto-renew
- >http://riseshia.github.io/2016/10/16/certbot-let-s-encrypt.html
- >https://nosmoke.cctoday.co.kr/2487 -> 명령어에 대한 설명도 잘 되어있다.
- >https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/SSL-on-an-instance.html
 
-
-
-
-
-
+> https://swiftcoding.org/lets-encrypt-renew
+ https://swiftcoding.org/lets-encrypt-auto-renew
+ http://riseshia.github.io/2016/10/16/certbot-let-s-encrypt.html
+ https://nosmoke.cctoday.co.kr/2487 -> 명령어에 대한 설명도 잘 되어있다.
+ https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/SSL-on-an-instance.html
+ https://nosmoke.cctoday.co.kr/2487
+ https://github.com/certbot/certbot/issues/2883
+ https://swiftcoding.org/lets-encrypt-auto-renew
