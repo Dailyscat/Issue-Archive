@@ -55,11 +55,13 @@ sudoers 파일에 대한 내용과 편집 시 주의할 점 정리
 
 vi 파일 내부:
 
-# # This file MUST be ...
+#This file MUST be ...
+<br/>#
+<br/>#
 
 .....
 
-    wow ALL=(ALL) NOPASSWD: ALL
+wow ALL=(ALL) NOPASSWD: ALL
 
 위 과정이 끝나고
 
