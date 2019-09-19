@@ -13,9 +13,7 @@ rules:
  (5) 방안은 ## 안의 과정은 ###
 -->
 
-# Issue:
-
-sudoers 파일에 대한 내용과 편집 시 주의할 점 정리
+# Issue: sudoers 파일에 대한 내용과 편집 시 주의할 점 정리
 
 ## 상황:
 
@@ -49,7 +47,7 @@ sudoers 파일에 대한 내용과 편집 시 주의할 점 정리
 ## 과정2: sudoers 파일에 생성한 계정에 권한 설정
 
 <br/>
-  
+
     $ sudo cp /etc/sudoers /etc/sudoers.backup
     $ sudo vi /etc/sudoers
 
