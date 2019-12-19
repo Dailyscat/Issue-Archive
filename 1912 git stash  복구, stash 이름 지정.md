@@ -31,13 +31,13 @@ git stash 해놓은 게 삭제된 상황
 ## 방안: git stash 해놓은 게 삭제된 상황
 
 <br/>
-  
-  1. 일단 삭제한 해쉬를 $함께 입력하여 복구해본다.
-     1. > git stash apply $stash_hash
-     2. > git branch recovered $stash_hash (다른 브랜치에 삭제된 stash 적용)
-  2. 삭제 된 해쉬를 찾는다.
-     1. > git fsck --no-reflog | awk '/dangling commit/ {print $3}'
-  
+
+1. 일단 삭제한 해쉬를 \$함께 입력하여 복구해본다.
+   1. > git stash apply \$stash_hash
+   2. > git branch recovered \$stash_hash (다른 브랜치에 삭제된 stash 적용)
+2. 삭제 된 해쉬를 찾는다.
+   1. > git fsck --no-reflog | awk '/dangling commit/ {print \$3}'
+
 <br/>
 <br/>
 <br/>
@@ -50,9 +50,9 @@ git stash 해놓은 게 삭제된 상황
 ## 방안: stash를 명확히하기 위하여 이름을 지정
 
 <br/>
-  
-  1. > git stash save "my_stash"
-  2.  > git stash push -m "message"
+
+1. > git stash save "my_stash"
+2. > git stash push -m "message"
 
 1번은 depricate 되었지만 사용은 가능하다.
 <br/>
