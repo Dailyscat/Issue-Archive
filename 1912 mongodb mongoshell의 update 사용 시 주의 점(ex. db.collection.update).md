@@ -60,5 +60,7 @@ a: "wow"
 <br/>
 
         참조:
+            https://docs.mongodb.com/manual/reference/operator/update/set/#up._S_set
+            https://docs.mongodb.com/manual/reference/method/db.collection.update/#update-method-examples
 
 <br/>
