@@ -55,6 +55,20 @@ a: "wow"
 }
 를 주고 기존 문서에서 a라는 값이 "wow"로 바꾸기를 기대했는데 \$set으로 연산자를 함께 주어야 바뀌는것을 확인했다.
 
+\***\*추가**
+
+and 연산을 대신하여 이런 방식으로도 가능하다.
+
+    db.schedule.update(
+      {"startDate":{
+        $gte:ISODate("2019-11-09T19:30:33+09:00"),
+        $lte:ISODate("2019-12-20T22:30:33+09:00")
+      }},{
+        $set:{
+          sendYn:true
+        }
+      },{multi: true})
+
 <br/>
 <br/>
 <br/>
