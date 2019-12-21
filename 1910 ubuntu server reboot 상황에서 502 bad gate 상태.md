@@ -13,9 +13,7 @@ rules:
  (5) 방안은 ## 안의 과정은 ###
 -->
 
-# Issue:
-
-ubuntu server를 reboot 한 상황에서 프로덕트가 뜨지 않고 502 상태
+# Issue: ubuntu server를 reboot 한 상황에서 프로덕트가 뜨지 않고 502 상태
 
 ## 상황:
 

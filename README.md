@@ -1,2 +1,3 @@
-# tipArchive
-tip archive 
+# Issue Archive
+
+Issue 해결 정리

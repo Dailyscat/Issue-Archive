@@ -13,9 +13,7 @@ rules:
  (5) 방안은 ## 안의 과정은 ###
 -->
 
-# Issue:
-
-eslint의 autoFixOnSave가 scss에 적용되는 오류
+# Issue: eslint의 autoFixOnSave가 scss에 적용되는 오류
 
 ## 상황:
 
