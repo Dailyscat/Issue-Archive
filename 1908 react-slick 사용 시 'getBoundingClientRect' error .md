@@ -13,9 +13,7 @@ rules:
  (5) 방안은 ## 안의 과정은 ###
 -->
 
-# Issue:
-
-react-slick 적용 과정에서 'getBoundingClientRect' 에러
+# Issue: react-slick 적용 과정에서 'getBoundingClientRect' 에러
 
 ## 상황:
 
