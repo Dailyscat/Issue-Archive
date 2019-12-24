@@ -41,8 +41,8 @@ _성공_
 ## 방안: nginx 설정 변경 (실패)
 
 <br/>
-  
-+ nginx pid 재생성
+
+- nginx pid 재생성
 
 nginx에서 실행되고 있는 master process를 못찾고 있다는 오류가 발생해서 pid를 삭제하고 nginx를 restart했다.
 
@@ -102,27 +102,43 @@ nginx에서 실행되고 있는 master process를 못찾고 있다는 오류가 
    1. 우리의 경우는 인스턴스들이 계속 실행이 되려고 1~2초 간격으로 커넥션을 요청했지만 게속 실패하고 있었음
 
 1. pm2 문제가 아닌걸 확인하고 meteor 앱자체가 로컬에서 제대로 동작은 되는지를 확인
+
    1. 우리의 경우는 제대로 동작 자체가 되지 않았고 여기서 meteor 구성에서 문제가 있다는거를 확인할 수 있었음
+
 1. meteor는 mongo와 react를 동시에 쓰는 framework 이기 때문에 전제는 mongodb server가 로컬에서 열려 있어야 했다.
+
 1. 로컬에서 meteor 앱을 구동시킬 때는 env에 직접 포트와 url을 할당하여 실행했다.
 
    1. export ROOT_URL=https://igogo.kr
    2. env
    3. export PORT=5000
 
-1. 4번 실행이 안됐고, mongo가 켜있는지를 확인하는 과정에서 mongo가 켜져있지 않을 걸 확인했다.
+1. 5번 실행이 안됐고, mongo가 켜있는지를 확인하는 과정에서 mongo가 켜져있지 않을 걸 확인했다.
+
    1. 우리의 경우는 server가 reboot 되면서 mongo가 열리지 않았기 때문에 서버를 열어야 했고 이에 추가로 터미널을 끄면 몽고 서버도 같이 꺼지기 때문에 background에서도 계속해서 기동되도록 설정해야했다.
+
       1. set +H
+
          1. 이 과정은 mongo url 내에 !가 존재했기 때문에 필요했다.
+
       2. export MONGO_URL=mongodb://
+
       3. find / -name "mongo\*"
+
          1. mongodb 명령어를 쳐서 기동시켜야 하는 폴더를 찾아야 했다.
+
       4. cd /var/lib/mongodb
+
       5. mongod --dbpath=/var/lib/mongodb
+
          1. 제대로 된 dbpath를 설정해줬다. 이는 cd + tab 을 통하여 index, collection이 있는지 파악하여 저장된 문서가 있는지를 통해 확인했다.
+
       6. ps -ef |grep mongod
+
       7. mongod --dbpath=/var/lib/mongodb --fork --logpath=/var/log/mongodb/
+
          1. 이를 통해 터미널을 꺼도 몽고디비가 계속 작동하도록 설정했다.
+
          2. https://blog.canapio.com/31
 
 <br/>
