@@ -34,6 +34,7 @@ intent scheme을 활용하는 과정에서 간헐적으로 samsung 기기에서 
 [삼성 디벨로퍼 사이트](https://developer.samsung.com/remotetestlab/rtlDeviceList.action?os=101)를 활용하여 galaxy5 부터 intent가 제대로 작동하는지를 확인할 수 있었다.
 
 (1) java runtime이 실행될 수 있는 환경이어야 한다.
+
 (2) ubuntu 라면 icedtea-netx 패키지를 활용하여 jlpt 파일을 실행시켜야 한다.
 
 <br/>
