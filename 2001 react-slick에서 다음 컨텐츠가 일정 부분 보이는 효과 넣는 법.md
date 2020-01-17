@@ -31,9 +31,9 @@ rules:
 ## 방안: padding과 em을 활용한 방법(실패)
 
 <br/>
-  
+
 [참고](https://github.com/akiran/react-slick/issues/443#issuecomment-419682040)
-  여기서 em은 body의 font-size를 상속받는데, 이는 현재 화면에서 보이는 캐러셀의 길이를 조절할 수 있고 padding을 줌으로써 각 간격을 조절한다는건데, 이는 사실 컨텐츠 자체의 CSS에 따라 다르다. 많은 이들이 추카추카를 눌러놨지만.. 활용도는 있으나 적합한 방식은 아니었다.
+여기서 em은 body의 font-size를 상속받는데, 이는 현재 화면에서 보이는 캐러셀의 길이를 조절할 수 있고 padding을 줌으로써 각 간격을 조절한다는건데, 이는 사실 컨텐츠 자체의 CSS에 따라 다르다. 많은 이들이 추카추카를 눌러놨지만.. 활용도는 있으나 적합한 방식은 아니었다.
 
 <br/>
 <br/>
@@ -46,8 +46,8 @@ rules:
 ## 방안: decimal point 활용 (성공)
 
 <br/>
-  
-  역시 사람마음은 다 똑같아. [이슈](https://github.com/akiran/react-slick/issues/674#issue-215201378)를 올린 사람의 마음이 나와 같다.
+
+역시 사람마음은 다 똑같아. [이슈](https://github.com/akiran/react-slick/issues/674#issue-215201378)를 올린 사람의 마음이 나와 같다.
 
 중간에 easy Enough를 댓글로 단 분의 말도 이해는 가지만 모든 컴포넌트가 다 다르기 때문에 이도 적용안되는.. 나같은 사람이 있을것이다.
 
