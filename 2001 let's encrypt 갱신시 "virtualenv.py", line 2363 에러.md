@@ -55,8 +55,7 @@ letsencrypt는 보통 3개월이 무료라 이를 갱신해서 쓰면 영구적�
 1. “ssh 계정 ID@내부 IP 주소” 혹은 “ssh 계정 ID@도메인 주소” 를 입력하여 원격 접속한다.
 2. vi run.sh
 
-
-    밑의 내용을 작성한다.
+밑의 내용을 작성한다.
 
       export LC_ALL="en_US.UTF-8"
       export LC_CTYPE="en_US.UTF-8"
