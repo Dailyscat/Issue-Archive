@@ -24,5 +24,20 @@ rules:
 <br/>
 
         참조:
+    json - Base64 encode a javascript object - Stack Overflow
+
+    https://stackoverflow.com/questions/38134200/base64-encode-a-javascript-object
+
+    Base64 encoding and decoding - Web API | MDN
+    https://developer.mozilla.org/ko/docs/Web/API/WindowBase64/Base64_encoding_and_decoding
+
+    Web Storage API 사용하기 - Web API | MDN
+    https://developer.mozilla.org/ko/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
+
+    [JAVASCRIPT] 자바스크립트를 이용해 문자열 BASE64 인코딩/디코딩 하기
+    http://1004lucifer.blogspot.com/2016/01/javascript-base64.html
+
+    reactjs - componentWillUnmount() not being called when refreshing the current page - Stack Overflow
+    https://stackoverflow.com/questions/39084924/componentwillunmount-not-being-called-when-refreshing-the-current-page
 
 <br/>
