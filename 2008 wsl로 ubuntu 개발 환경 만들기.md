@@ -36,23 +36,26 @@ rules:
 ## 개념: wsl2을 위한 업데이트, ubuntu 설치
 
 <br/>
-  https://docs.microsoft.com/ko-kr/windows/wsl/install-win10
-  https://www.44bits.io/ko/post/wsl2-install-and-basic-usage
-  https://wnsgml972.github.io/setting/2019/05/07/wsl/
-  https://jootc.com/p/201901132508
-  https://webdir.tistory.com/542
 
   1. Windows 10 실행, 버전 2004로 업데이트, 빌드 19041 이상. => 상당히 오래 걸린다. 미리미리 업데이트 하는게..
+  
   2. dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+    
     - "Linux용 Windows 하위 시스템" 옵션 기능을 사용
     - gui에서도 가능하지만 커맨드라인에서 하는게 편한다.
+  
   3. wsl --set-default-version 2 
+    
     - wsl의 버전을 2로 기본 설정
+  
   4. Linux 배포 설치
+    
     - 나는 18.04를 기본으로 했다. 20.04는 gui로 사용했을 때 에러가 좀 발생했어서 그나마 최근이고 그나마 안정적인 18.04로..
     - 리셋을 위해서는 제어판 -> 앱 및 기능 -> 고급옵션 -> 초기화, 제거 둘 중 사용
     - 설치가 완료되면 실행을 누르고 설치가 다 되면 이름, 비밀번호를 입력하면 완료! 굉장히 쉽다.
+  
   5. wsl -l -v 명령어를 통해 wsl2 버전이 적용되었는지 확인
+  
   6. wsl --help 명령어로 다른 옵션도 살펴볼 수 있다.
 
 에러
@@ -67,6 +70,12 @@ https://docs.microsoft.com/ko-kr/windows/wsl/install-win10#troubleshooting-insta
 <br/>
 
         참조:
+          https://docs.microsoft.com/ko-kr/windows/wsl/install-win10
+          https://www.44bits.io/ko/post/wsl2-install-and-basic-usage
+          https://wnsgml972.github.io/setting/2019/05/07/wsl/
+          https://jootc.com/p/201901132508
+          https://webdir.tistory.com/542
+
 
 <br/>
 
@@ -75,7 +84,9 @@ https://docs.microsoft.com/ko-kr/windows/wsl/install-win10#troubleshooting-insta
 <br/>
 
   1. [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows) - Docker Hub을 설치
+  
   2. 설정으로 들어가서 General 탭에서 Use the WSL2 based engine 옵션 체크
+  
   3. Resource -> WSL Integration 페이지로 이동해서 설정을 확인 -> 이 단계를 안하면 에러난다.
 
 에러
@@ -101,9 +112,6 @@ https://arclab.tistory.com/247
 ## 개념: ubuntu 기본 설정
 
 <br/>
- 
-https://luckyyowu.tistory.com/409
-https://medium.com/harrythegreat/oh-my-zsh-iterm2%EB%A1%9C-%ED%84%B0%EB%AF%B8%EB%84%90%EC%9D%84-%EB%8D%94-%EA%B0%95%EB%A0%A5%ED%95%98%EA%B2%8C-a105f2c01bec
 
   - sudo apt-get update, sudo apt full-upgrade로 저장소 업데이트
   - apt와 apt-get 차이는 apt는 프로그레스바를 보여주며 apt-get, apt-cache에서 필요한 기능들을 하나의 명령어로 사용할 수 있다.
@@ -123,7 +131,7 @@ https://medium.com/harrythegreat/oh-my-zsh-iterm2%EB%A1%9C-%ED%84%B0%EB%AF%B8%EB
     - sudo apt install vim git curl 
   
   - zsh과 oh-my-zsh 설치, 그리고 플러그인 적용
-    - sudo apt install zsh -y && chsh -s `which zsh`
+    - ``` sudo apt install zsh -y && chsh -s `which zsh` ```
     - chsh 명령어 실행시 password 를 확인합니다.
     - curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
     - chsh 명령어로 기본 쉘을 변경해도 로그아웃 후 재 로그인 전까지 Terminal 앱에서는 bash 쉘이 기본
@@ -147,6 +155,8 @@ https://medium.com/harrythegreat/oh-my-zsh-iterm2%EB%A1%9C-%ED%84%B0%EB%AF%B8%EB
 <br/>
 
         참조:
+        https://luckyyowu.tistory.com/409
+        https://medium.com/harrythegreat/oh-my-zsh-iterm2%EB%A1%9C-%ED%84%B0%EB%AF%B8%EB%84%90%EC%9D%84-%EB%8D%94-%EA%B0%95%EB%A0%A5%ED%95%98%EA%B2%8C-a105f2c01bec
 
 <br/>
 
@@ -155,19 +165,27 @@ https://medium.com/harrythegreat/oh-my-zsh-iterm2%EB%A1%9C-%ED%84%B0%EB%AF%B8%EB
 ## 개념: windows terminal 설정
 
 <br/>
-https://github.com/microsoft/terminal/issues/2743
-https://medium.com/@callback.insanity/windows-terminal-changing-the-default-shell-c4f5987c31
-https://medium.com/@slmeng/how-to-install-powerline-fonts-in-windows-b2eedecace58
+
+        https://github.com/microsoft/terminal/issues/2743
+        https://medium.com/@callback.insanity/windows-terminal-changing-the-default-shell-c4f5987c31
+        https://medium.com/@slmeng/how-to-install-powerline-fonts-in-windows-b2eedecace58
 
   1. 기본 directory 설정
+    
     - "startingDirectory": "//wsl$/Ubuntu-20.04/home/Your Ubuntu Username" 처럼 우분투 디렉토리 내부에 설정하는게 일반적이다.
     - 나 같은 경우는 c드라이브가 아닌 다른 드라이브에 작업들을 저장해놓으려고 했다.
     - "startingDirectory": "E:dailyscat/18.04"와 같이 작성
+  
   2. 탭 네임 설정
+    
     - "suppressApplicationTitle": true,
+  
   3. 새 탭의 기본 쉘 설정
+    
     - "defaultProfile": "{c6eaf9f4-32a7-5fdc-b5cf-066e8a4b1e40}",
+  
   4. 폰트설정 
+    
     - windows에 글꼴을 설치하고 해당하는 이름만 터미널의 설정에서 fontFace: ~~~ 로 주면 적용된다. 
     - 글꼴설치는 시작버튼을 오른쪽 클릭 후 메뉴에서 실행 -> %windir%\fonts -> 원하는 ttf 파일을 붙여넣기 하면 된다.
 
@@ -196,11 +214,17 @@ sudo apt install golang
 ```
 
 [powerline-shall](https://github.com/b-ryan/powerline-shell#zsh) 원본은 pip를 활용해서 하기 때문에 python 설치가 필요하다.
+
+        sudo apt-get install python-pip
+        sudo apt-get install python3-pip     
+
 해당 설치 후에  [에러](https://github.com/powerline/powerline/issues/187)가 날 수 있는데 이때 기존의 `export PATH=$HOME/bin:/usr/local/bin:$PATH`를  `export PATH=$HOME/.local/bin:$PATH`로 바꿔주면 해결이 됐다. 
 
 powerline-shall의 테마를 활용하기위해
 
 1. .zshrc에 해당 내용을 넣는다.
+
+```
       function powerline_precmd() {
                   PS1="$(powerline-shell --shell zsh $?)"
       }
@@ -217,11 +241,12 @@ powerline-shall의 테마를 활용하기위해
       if [ "$TERM" != "linux" ]; then
         install_powerline_precmd
       fi
+```
 
 2. config 파일을 생성하고 테마를 결정한다.
 
 - `mkdir -p ~/.config/powerline-shell`
-- 해당 디렉토리로 가서 `powerline-shell --generate-config`
+- 해당 디렉토리로 가서 `powerline-shell --generate-config > ~/.config/powerline-shell/config.json`
 - vi 해당 디렉토리
 - 
       {
@@ -253,6 +278,28 @@ plugin은 plugin 대로 쓰고 테마는 또 테마대로 이쁘게 쓰게 되�
 <br/>
 
         참조:
+
+<br/>
+<br/>
+
+## 개념: wsl ubuntu에서 code . 명령어를 못 잡을 때
+
+<br/>
+  
+  zsh: command not found: code와 같은 에러가 발생했을 때
+
+      Stop WSL (wsl --shutdown)
+      Remove WSL Remote extension from VSCode
+      Reinstall WSL Remote extension from VSCode
+
+  와 같이 처리하면 된다!
+
+<br/>
+<br/>
+<br/>
+
+        참조:
+        https://github.com/microsoft/vscode-remote-release/issues/3417
 
 <br/>
 
