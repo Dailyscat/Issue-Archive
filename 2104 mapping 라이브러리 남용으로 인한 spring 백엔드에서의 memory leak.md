@@ -62,6 +62,14 @@ less a.txt
 덤프를 확인해보니 blocked 되는 쓰레드가 있었고 해당 쓰레드에서 발생하는 함수를 확인했다.
 
 ```
+"catalina-exec-98" #228 daemon prio=5 os_prio=0 tid=0x00007f2ec9641000 nid=0xf1c5 waiting for monitor entry [0x00007f2c150c7000]
+java.lang.Thread.State: BLOCKED (on object monitor)
+...
+at com.linecorp.lcp.front.apps.converter.CategoryConverter.convert(CategoryConverter.java:50)
+```
+
+
+```
 원격 서버에서 scp 권한@테스트서버:/덤프 파일 위치 /내 게이트웨이의 위치
 로컬에서 scp 아이디@게이트웨이:/파일위치 /로컬의 덤프 파일 위치
 ```
