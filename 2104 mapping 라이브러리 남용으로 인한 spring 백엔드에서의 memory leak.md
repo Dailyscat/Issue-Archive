@@ -131,5 +131,7 @@ Performance의 오버헤드 : Reflection에는 동적으로 해석되는 유형�
         https://gyrfalcon.tistory.com/entry/Java-Reflection
         https://medium.com/msolo021015/%EC%9E%90%EB%B0%94-reflection%EC%9D%B4%EB%9E%80-ee71caf7eec5
         https://brunch.co.kr/@kd4/8
+        http://honeymon.io/tech/2019/05/30/java-memory-leak-analysis.html
+        https://woowabros.github.io/tools/2019/05/24/jvm_memory_leak.html
 
 <br/>
