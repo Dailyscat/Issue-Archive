@@ -101,15 +101,33 @@ rules:
 
 <br/>
 
-## 개념:
+## 개념: cucumber와 cypress를 함께 사용할 때 cy.intercept를 사용하는 부분은 한 블럭에서 다 처리가 되어야 한다.
 
 <br/>
-  개념에 대한 내용
+
+        When(`요청을 보냈다면`, () => {
+            cy.intercept({
+                url: 'https://abcde/wow*',
+                query: {
+                    gggo: "2"
+                }
+            }).as('req');
+            cy.get(".class").children().first().next().click();
+            cy.wait('@req');
+        })
+
+위와 같은 방식이 When 절 블럭안에서 다 처리되어야 한다.
+
+xhr 요청의 응답코드가 필요했는데 cy.wait이 작동하지 않았는데 이 부분은 cypress 버전 문제였고 7.2.0에서 resolve되어서 버전 업데이트를 했고 그래도 wait이 작동하지 않아서 확인해보니 원래는
+When절에서 click하고 Then절에서 wait후 요청 코드를 확인했는데 이 부분이 호환이 안되서 한 블럭안에서 처리해보니 됐다.
+
+
 <br/>
 <br/>
 <br/>
 
         참조:
+        https://github.com/cypress-io/cypress/releases/tag/v7.2.0
 
 <br/>
 
