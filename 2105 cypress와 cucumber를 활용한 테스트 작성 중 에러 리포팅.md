@@ -16,6 +16,7 @@ rules:
 # Issue: cypress와 cucumber를 활용한 테스트 작성 중 에러 리포팅
 
 ## 상황:
+
 라인쇼핑의 스냅과 카테고리 관련 페이지에 대한 테스트 작성
 
 <br/>
@@ -24,8 +25,8 @@ rules:
 
 - 특정 에러를 무시하고 테스트가 진행되도록 설정하는 법
 - 모바일에서의 테스트를 위한 설정
-- cucumber에서 describe하는 텍스트에서 파라미터를 받으려면 ``(backtick)으로 처리해야한다.
-
+- intercept와 wait을 사용할 때 주의점
+- cucumber를 사용할 때는 테스트 문서에 괄호 ")"를 사용하면 안된다.
 
 <br/>
 
@@ -93,6 +94,39 @@ rules:
         }
 
     위와 같은 코드 추가하여 cucumber 전처리기가 작동해야 될 폴더를 지정해주어야 한다.
+
+<br/>
+<br/>
+<br/>
+
+        참조:
+
+<br/>
+
+## 개념: intercept와 wait을 사용할 때 주의점
+
+<br/>
+
+```
+let conunt = 0;
+When(호호, (merchant) => {
+    cy.intercept({
+        pathname: '/a/b',
+        query: {
+            url: "*",
+        },
+    }).as(`zz_${count}`)
+    cy.get(':nth-child(1) > .product_box > .button_group > .link').click({force: true});
+})
+Then(히히, (asp) => {
+    cy.wait(`@zz_${count}`).then(interception => {
+        count++;
+    })
+})
+```
+
+이때 count값이 없어도 `대체적`으로 잘 작동하긴하지만 이전의 alias를 인식하여 잘못된 결과를 도출해내는 경우가 있었다. alias를 리셋하는 방법을 찾아봤지만 딱히 없음
+
 <br/>
 <br/>
 <br/>
@@ -101,52 +135,12 @@ rules:
 
 <br/>
 
-## 개념: cucumber와 cypress를 함께 사용할 때 cy.intercept를 사용하는 부분은 한 블럭에서 다 처리가 되어야 한다.
+## 개념: cucumber를 사용할 때는 테스트 문서에 괄호 ")"를 사용하면 안된다.
 
 <br/>
 
-        When(`요청을 보냈다면`, () => {
-            cy.intercept({
-                url: 'https://abcde/wow*',
-                query: {
-                    gggo: "2"
-                }
-            }).as('req');
-            cy.get(".class").children().first().next().click();
-            cy.wait('@req');
-        })
+괄호가 있으면 에러를 발생시킨다.
 
-위와 같은 방식이 When 절 블럭안에서 다 처리되어야 한다.
-
-xhr 요청의 응답코드가 필요했는데 cy.wait이 작동하지 않았는데 이 부분은 cypress 버전 문제였고 7.2.0에서 resolve되어서 버전 업데이트를 했고 그래도 wait이 작동하지 않아서 확인해보니 원래는
-When절에서 click하고 Then절에서 wait후 요청 코드를 확인했는데 이 부분이 호환이 안되서 한 블럭안에서 처리해보니 됐다.
-
-
-<br/>
-<br/>
-<br/>
-
-        참조:
-        https://github.com/cypress-io/cypress/releases/tag/v7.2.0
-
-<br/>
-
-## 개념:
-
-<br/>
-  개념에 대한 내용
-<br/>
-<br/>
-<br/>
-
-        참조:
-
-<br/>
-
-## 개념:
-
-<br/>
-  개념에 대한 내용
 <br/>
 <br/>
 <br/>
