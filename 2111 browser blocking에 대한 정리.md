@@ -34,7 +34,9 @@ chunk를 작게 많이 만들어서 불러오는것이 무조건 좋은가에 �
 
 이때 번들을 필요 이상으로 작게 만들어서 여러개의 작은 번들을 요청한다면 이는 더 중요한 번들을 받아오는 데에 지연을 발생시키는 요소가 될 수 있다. 물론 defer와 async 설정 등 최적화 옵션을 넣을 수 있고 6개의 요청이 끝나고 다음 6개의 자원을 동시에 받는 등이 가능할 수 있지만 일반적인 경우에는 한번에 하나의 요청과 다운로드가 끝나고 다시 재개되는 형식이 주를 이룬다. Opera, IE10, 11, & 12 등은 한번에 한 호스트에서 가능한 연결의 개수를 조절할 수 있지만 이는 서버성능에도 좋지않고 다른 문제를 야기할 수 있다(ddos)
 
-
+하지만 http2를 사용한다면 얘기가 달라진다.
+http2는 하나의 요청만을 사용하지만 http/2의 multiplexing 프로토콜을 통해서 거의 병렬 요청에 대한 제한 없이 다운로드가 가능하다.
+이러한 부분에서는 최대한 작은 번들이 효율적이다.
   
 <br/>
 <br/>
@@ -42,6 +44,8 @@ chunk를 작게 많이 만들어서 불러오는것이 무조건 좋은가에 �
 
         참조:
         https://blog.bluetriangle.com/blocking-web-performance-villain
+        https://stackoverflow.com/questions/36835972/is-the-per-host-connection-limit-raised-with-http-2
+        https://stackoverflow.com/questions/36517829/what-does-multiplexing-mean-in-http-2/36519379
 
 <br/>
 
