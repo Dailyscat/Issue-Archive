@@ -46,6 +46,7 @@ http2는 하나의 요청만을 사용하지만 http/2의 multiplexing 프로토
         https://blog.bluetriangle.com/blocking-web-performance-villain
         https://stackoverflow.com/questions/36835972/is-the-per-host-connection-limit-raised-with-http-2
         https://stackoverflow.com/questions/36517829/what-does-multiplexing-mean-in-http-2/36519379
+        https://www.chrisclaxton.me.uk/chris-claxtons-blog/webpack-chunksplitting-deepdive
 
 <br/>
 
