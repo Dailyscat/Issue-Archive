@@ -91,12 +91,13 @@ rules:
   - dllPlugin의 경우는 사용자의 의도로, 자주 갱신되지 않는 모듈(framework, core module)을 빌드타임을 줄이기 위해 사용하는 경우가 많다. 이때 사용자의 의도로 웹팩을 사용하여 컴파일 한다.
 
   - 쓰임새와 용도가 매우 다르고 무엇보다 사용자의 의도로 분류가 되는지가 관건이라고 생각된다.
-  
+
 <br/>
 <br/>
 <br/>
 
         참조:
+        https://stackoverflow.com/questions/41890855/webpack-common-chunks-plugin-vs-webpack-dll-plugin
 
 <br/>
 
