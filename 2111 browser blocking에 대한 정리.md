@@ -37,6 +37,9 @@ chunk를 작게 많이 만들어서 불러오는것이 무조건 좋은가에 �
 하지만 http2를 사용한다면 얘기가 달라진다.
 http2는 하나의 요청만을 사용하지만 http/2의 multiplexing 프로토콜을 통해서 거의 병렬 요청에 대한 제한 없이 다운로드가 가능하다.
 이러한 부분에서는 최대한 작은 번들이 효율적이다.
+
+이때 http2는 서버에는 또 다른 문제를 야기할 수 있다. 기존에는 최대 6개의 요청이 하나의 리소스만을 가져가기 때문에 해당 상황만을 두고 가용영역을 설정해둔 서버가 http2를 적용했을 때 병렬로 리소스를 요청하게 되기 때문에 cpu문제가 발생할 수 있고 서버에 과부하가 발생하게 할 수 있다.
+
   
 <br/>
 <br/>
@@ -47,6 +50,8 @@ http2는 하나의 요청만을 사용하지만 http/2의 multiplexing 프로토
         https://stackoverflow.com/questions/36835972/is-the-per-host-connection-limit-raised-with-http-2
         https://stackoverflow.com/questions/36517829/what-does-multiplexing-mean-in-http-2/36519379
         https://www.chrisclaxton.me.uk/chris-claxtons-blog/webpack-chunksplitting-deepdive
+        https://www.lucidchart.com/techblog/2019/04/10/why-turning-on-http2-was-a-mistake/
+        https://brainbackdoor.tistory.com/113
 
 <br/>
 
