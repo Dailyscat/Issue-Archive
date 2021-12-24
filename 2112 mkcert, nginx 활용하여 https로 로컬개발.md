@@ -30,6 +30,7 @@ rules:
 
 
 <br/>
+
 ```
 /etc/hosts
 127.0.0.1 원하는 도메인 네임
@@ -44,7 +45,7 @@ On iOS, you can either use AirDrop, email the CA to yourself, or serve it from a
 
 For Android, you will have to install the CA and then enable user roots in the development build of your app. See this StackOverflow answer.
 
-// 인증서가 필요한 위치에서 `mkcert 도메인네임`을 사용하면 된다.
+// 인증서가 필요한 위치에서 "mkcert 도메인네임"을 사용하면 된다.
 // mkcert -CAROOT 를 통해 루트 위치 찾을 수 있음
 
 /usr/local/etc/nginx/
@@ -69,25 +70,12 @@ server {
 }
 ```
 
-
-
-
 <br/>
 <br/>
 <br/>
 
         참조:
+        https://studyforus.tistory.com/209
 
 <br/>
 
-## 개념:
-
-<br/>
-  개념에 대한 내용
-<br/>
-<br/>
-<br/>
-
-        참조:
-
-<br/>
