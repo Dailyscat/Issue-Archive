@@ -70,12 +70,24 @@ server {
 }
 ```
 
+
+```
+접속과정에서 로컬 컴퓨터의 hosts 파일을 항상 가장 먼저 확인합니다. 이 과정을 통해 우선적으로 접속 시킬 것인지 확인하는 과정이지요. 만약 로컬 컴퓨터에 hosts 파일이 없다면 DNS 서버를 검색합니다. 
+
+출처: https://studyforus.tistory.com/209 [Study For Us]
+```
+
 <br/>
 <br/>
 <br/>
 
         참조:
+        https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/
+        https://nginx.org/en/docs/ngx_core_module.html
         https://studyforus.tistory.com/209
+        https://github.com/JaeYeopHan/tip-archive/issues/33
+        https://jgj1018.github.io/server/2017/02/11/server1.html
+        https://chanhy63.tistory.com/19
 
 <br/>
 
