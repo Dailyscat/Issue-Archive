@@ -124,7 +124,37 @@ https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#appendix-b-expre
 타임리프에서 자바8 날짜인 LocalDate , LocalDateTime , Instant 를 사용하려면 추가 라이브러리가 필요하다. 스프링 부트 타임리프를 사용하면 해당 라이브러리가 자동으로 추가되고 통합된다.
 타임리프 자바8 날짜 지원 라이브러리 thymeleaf-extras-java8time
 자바8 날짜용 유틸리티 객체 #temporals
-<span th:text="${#temporals.format(localDateTime, 'yyyy-MM-dd HH:mm:ss')}"></ span>
+<span th:text="${#temporals.forma(localDateTime, 'yyyy-MM-dd HH:mm:ss')}"></ span>
 ```
 
 #### URL 링크
+
+```
+<a>th:href=@{/hello}</a>
+@{/hello(param1=${param1}, param2=${param2})}
+@{/hello/{param1}/{param2}(param1=${param1}, param2=${param2})}
+
+```
+
+#### 리터럴
+
+리터럴은 소스 코드 상에 고정된 값을 말하는 용어.
+
+타임리프에서 문자 리터럴은 항상 '(작은 따옴표)로 감싸야 한다.
+
+`<span th:text="'hello'"></span>`
+
+하지만 ''으로 항상 감싸는건 귀찮다.
+그래서 공백없이 쭉 이어진다면 하나의 의미있는 토큰(리터럴)로 인지한다.
+`<span th:text="hello"></span>` //이때 ''생략
+
+오류
+`<span th:text="hello world!"></span>` // 중간에 빈칸 있으니 오류 발생
+
+`<span th:text="'hello world!'"></span>` // 작은 따옴표로 감싸서 오류 해결
+
+```
+<span th:text="'hello' + ' world!@'"></span>
+<span th:text="'hello' + ${data}"></span>
+<span th:text="|hello ${data}|"></span>
+```
