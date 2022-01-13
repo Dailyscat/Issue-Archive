@@ -137,14 +137,19 @@ function _f() {
 
 <br/>
 
-## 개념:
+## 개념: transform-rumtime 플러그인 정리
 
 <br/>
-  개념에 대한 내용
+  - 바벨은 소스코드내에서 공통적으로 사용하는 함수같은 것들을 위해서 작은 헬퍼 함수를 사용한다. 
+  - 이런 헬퍼 함수들은 다른 모듈에서도 사용되고 이때 불필요하게 중복되서 헬퍼함수들이 생성되는 경우가 있다.
+  - transform-runtime은 이런 헬퍼함수들을 공통으로 참조할 수 있도록 해주어서 번들사이즈를 줄이도록 만든다.
+  
 <br/>
 <br/>
 <br/>
 
         참조:
+        https://babeljs.io/docs/en/babel-plugin-transform-runtime#helper-aliasing
+        https://babeljs.io/docs/en/babel-plugin-transform-runtime
 
 <br/>
