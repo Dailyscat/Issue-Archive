@@ -140,3 +140,21 @@ grep: express.txt: No shuc file or directory
 grep -s "help" express.txt
 
 ```
+
+```
+// 출력라인 제어 옵션
+
+// -b, --byte-offset 
+// 검색 패턴이 포함된 라인의 바이트 수를 라인 제일 앞부분에 함께 보여준다.
+// 153:# description: regur~~
+// 291: thisis ~~~
+
+// -H, --with-filename
+// 해당하는 패턴이 있는 파일명을 앞에 보여준다.
+grep 'express' expression.txt
+//# description
+grep -H 'express' expression.txt
+//expression.txt:#  description
+
+```
+
