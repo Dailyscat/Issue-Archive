@@ -156,5 +156,27 @@ grep 'express' expression.txt
 grep -H 'express' expression.txt
 //expression.txt:#  description
 
+// -h, --no-filename 옵션을 사용하는 경우
+// 리눅스는 기본적으로 파일 명을 라인앞에 보여준다.
+// 이때 파일명을 숨기고 싶을 대 사용하는 옵션
+
+grep 'express' ./*
+expression.txt:#~~
+
+grep -h 'express' ./*
+#~~
 ```
 
+```
+// --label=LABEL
+// 검색한 파일 정보 앞에 라벨을 붙일 때 사용
+ls -l | grep --label=file -H express 
+```
+
+```
+// -n, --line-number
+// 해당 파일에서 찾은 라인의 번호 앞에 보여준다.
+grep -n "question" expression.txt
+23:
+24:
+```
