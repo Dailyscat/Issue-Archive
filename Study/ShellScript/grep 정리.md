@@ -179,4 +179,48 @@ ls -l | grep --label=file -H express
 grep -n "question" expression.txt
 23:
 24:
+
+// -T, --initial-tab
+// 탭을 이용해 라인번호와 문자열 사이 간격 조정, 가독성을 위함
+grep -T -n 'question' expression.txt
+
+// -u --unix-byte-offset
+// 유닉스 스타일의 바이트 수를 라인 앞에 보여줌
+
+// -Z, --null
+// 파일 목록 검색할 때 여러줄로 검색된 파일 목록의 뉴라인을 제거해 한줄로 출력
+// 검색된 파일명을 for문과 같은 제어문의 인자값으로 사용하기 좋다.
+cp expression.txt. test.txt
+grep -Z -l 'express' ./*
+```
+
+```
+// -A 라인 수, --after-context=라인 수
+// 패턴이 포함된 라인 후 선언한 라인 만큼 보여줌. 마지막으로 검색된 라인 아래 2줄
+grep -A 2 'question' expresison.txt
+
+// -B 라인 수, --before-context=라인 수
+// 패턴이 포함 된 라인 전에 선언한 라인 수에 해당하는 라인만큼 앞에 라인 추가하여 보여줌
+grep -B 2 'question' expression.txt
+
+// -C 라인 수, --contxt=라인 수
+// 패턴이 검색 된 라인 위와 아래를 설정한 라인 수만큼 더 보여준다.
+// 처음으로 검색된 패턴, 마지막으로 검색된 패턴 위아래로.
+grep -C 2 'expression' expression.txt
+
+// --group-separator=그룹구분
+// -A,-B,-C 와 함께 사용
+// 검색한 문자열이 서로 다른 줄에서 검색되면 --group-separator과 함께 보여짐
+grep -A 1 --group-separator="=======" '# [[:alpha:]]' expression.txt
+
+// --no-group-separator
+// 그룹구분 기호 사용하지 않음
+// 기본적으로 --group-separator를 사용하지 않으면 --가 기본적인 구분자로 사용된다. 이를 위해 사용
+```
+
+파일 및 디렉터리 관련 옵션
+
+```
+
+
 ```
