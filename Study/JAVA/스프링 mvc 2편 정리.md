@@ -158,3 +158,34 @@ https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#appendix-b-expre
 <span th:text="'hello' + ${data}"></span>
 <span th:text="|hello ${data}|"></span>
 ```
+
+### 스프링 메시지
+
+#### 스프링 mvc
+
+messageSource.setBasenames("message", "error")
+// 설정 파일의 이름을 지정한다.
+// message.properties, error.properties를 읽는다.
+// 국제화 기능은 message_en.properties 와 같이 이름 마지막에 언어 정보를 준다. 국제화 파일이 없으면 message.properties를 기본으로 사용
+// 파일은 /resources/messages.properties에 위치
+// 여러 파일 한번에 지정 가능
+
+messageSource.defaultEncoding("utf-8");
+// 보통 utf-8 사용
+
+#### 스프링 부트
+
+스프링 부트가 자동으로 MessageSource를 스프링 빈으로 등록한다
+
+application.properties에
+spring.messages.basename=message,config.i18n.messages
+// resources 밑에 message 파일
+// resources 밑에 config 밑에 i18n 밑에 messages 파일
+
+messagesource를 스프링 빈으로 등록하지 않고, 스프링 부트와 관련된 별도 설정안하면 messages라는 이름으로 기본 등록(생략해도 기본으로 만듬)
+이때 기본값은 spring.messages.basename=messages
+국제화를 원하면 messages_kr, _en 등 파일만 만들어주면 된다.
+
+
+
+
