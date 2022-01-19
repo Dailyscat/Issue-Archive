@@ -221,6 +221,70 @@ grep -A 1 --group-separator="=======" '# [[:alpha:]]' expression.txt
 파일 및 디렉터리 관련 옵션
 
 ```
+//-a, --text
+// 패턴 검색 대상이 바이너리파일인 경우 사용한다.
+cp /bin/grep ./grep_binary_test
+grep -a '^Context' grep_binary_test // 바이너리에서 Context로 시작되는 문자열 검색
 
+//--binary-files=TYPE
+// -a옵션과 비슷한데 TYPE에 binary, text, without-match가 있다.
+
+// grep_binary_test에 매칭되는 패턴이 있는지 보여준다.
+grep --binary-files=binary '^Context' grep_binary_test
+
+// 패턴이 포함된 라인을 보여준다.
+grep --binary-files=text '^Context' grep_binary_test
+
+//-D ACTION, --devices = ACTION
+grep -D skip 'loop' /dev/mem //mem이란 기기는 검색 대상아님
+
+//-d ACTION, --directories = ACTION
+//-d 옵션은 디렉터리를 검색대상에서 제외, 혹은 포함 시킬 수 있다.(read, skip 사용)
+grep -d read 'CPU' ./*
+grep -d skip 'CPU' ./*
+
+//--exclude=GLOB
+//GLOB는 *?/와 같은 와일드 카드 문자가 포함된 파일명 의미
+grep --exclude=express* 'CPU' ./*
+
+//--exclude-from=FILE
+// 파일 자체를 검색대상에서 제외
+grep --exclude-from=expression.tar.gz 'CPU' ./*
+
+//--exclude-dir=DIR
+// 디렉터리를 검색대상에서 제외
+// -r 옵션은 하위 디렉터리의 파일까지 검색 대상으로 설정하게 되지만 제외대상 디렉터리는 제외합니다.
+mkdir file-dir; mv file*.txt file-dir // file-dir 디렉터리 생성 후 file1.txt를 file-dir로 이동
+grep -r 'mail' ./*
+grep -r --exclude-dir=file-dir 'mail' ./*
+
+//-I
+// 바이너리 파일에서 패턴이 검색되어도 결과로 출력하지 않는다.
+grep -I '^Context' grep_binary_test
+
+//--include=GLOB
+// 특정 파일명을 시작하는 파일들을 검색대상으로 포함한다.
+grep --include=express* 'CPU' ./*
+
+//-r, --recursive
+// 해당 디렉터리의 하위 디렉터리의 내용까지 전부 검색이 필요할 때
+grep -r --include=expression* 'CPU' ./*
+
+//-R, --dereference-recursive
+// 해당 디렉터리의 하위 디렉터리의 심볼릭 링크도 파일로 보고 검색을 진행한다.
+
+cd file-dir
+ln -s ../expression.txt express.txt //expression.txt를 바라보는 express.txt
+ls -l express.txt // ls로 express.txt의 링크 확인
+grep -r 'CPU' ./* // 심볼릭 링크는 검색에서 제외
+grep -R 'CPU' ./* // 심볼릭 링크도 검색에 포함
+
+#> ln [option] [기존 파일 경로] [링크 파일의 경로]
+-옵션 없이 사용 시 하드 링크 파일 생성
+-s, --symbolic(soft) : 링크할 원본이 심볼릭 링크된 파일이면, 그 파일을 링크한다.
+-d, --directory : 디렉터리의 하드 링크를 생성한다(root 계정만 가능).
+https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=appeal7712&logNo=221685382937
+
+​
 
 ```
