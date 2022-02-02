@@ -184,7 +184,7 @@ spring.messages.basename=message,config.i18n.messages
 
 messagesource를 스프링 빈으로 등록하지 않고, 스프링 부트와 관련된 별도 설정안하면 messages라는 이름으로 기본 등록(생략해도 기본으로 만듬)
 이때 기본값은 spring.messages.basename=messages
-국제화를 원하면 messages_kr, _en 등 파일만 만들어주면 된다.
+국제화를 원하면 messages_kr, \_en 등 파일만 만들어주면 된다.
 
 #### 스프링의 국제화 메시지 선택
 
@@ -193,13 +193,11 @@ messagesource를 스프링 빈으로 등록하지 않고, 스프링 부트와 �
 하지만 Locale 선택 방식을 변경할 수 있도록 LocaleResolver라는 인터페이스를 제공하므로
 구현체를 변경할 수 도 있다.
 
-
 ### 검증
 
 컨트롤러의 중요 역할 중 하나는 HTTP 요청이 정상인지 검증하는 것.
 
 Safe Navigation Operator(js에서는 optional chaining)
-
 
 ```
 <div th:if="${errors?.containsKey('globalError')}">
@@ -211,7 +209,7 @@ Safe Navigation Operator(js에서는 optional chaining)
 
 ### BindingResult
 
-* cmd + p를 통하면 필요한 인자 확인 가능
+- cmd + p를 통하면 필요한 인자 확인 가능
 
 ```
 public String addItemV1(@ModelAttribute Item item, BindingResult bindingResult,
@@ -275,6 +273,7 @@ defaultMessage : 기본 오류 메시지
 new FieldError("item", "price", item.getPrice(), false, null, null, "가격은 1,000 ~
 1,000,000 까지 허용합니다.")
 ```
+
 사용자의 입력 데이터가 @ModelAttribute에 바인딩 되는 시점에 오류가 발생하면, 예를들어 다른 타입의 값이 들어오면 모델 객체에 사용자 입력 값을 유지하기 어렵다. 이를 위해 FieldError의 세번째 인자로 해당 값을 기억하게 한 뒤에 이를 활용한다.
 
 ```
@@ -292,7 +291,7 @@ messages.properties를 그냥 사용보단 error.properties로 따로 관리하�
 
 ```
 // application.properties
-spring.messages.basename=messages,errors 
+spring.messages.basename=messages,errors
 
 // 두개의 파일을인식한다. 아예 없으면 messages를 기본값으로 인식
 // errors_en.properties 파일은 에러 국제화 파일로도 가능
@@ -321,9 +320,8 @@ defaultMessage : 오류 메시지를 찾을 수 없을 때 사용하는 기본 �
 bindingResult.rejectValue("price", "range", new Object[]{1000, 1000000}, null)
 ```
 
-* iter + TAB => 상단 배열에 대한 for문 자동 생성
-* soutv + TAB => system.out.println 생성
-
+- iter + TAB => 상단 배열에 대한 for문 자동 생성
+- soutv + TAB => system.out.println 생성
 
 reject()와 rejectValue()의 내부는 messageCodesResolver를 사용한다.
 
@@ -331,5 +329,28 @@ reject()와 rejectValue()의 내부는 messageCodesResolver를 사용한다.
 
 핵심은 구체적인 것에서 덜 구체적은것으로 메시지를 짜는게 좋다.
 
+## Bean Validation
 
+javax validation을 통해 유효성검증에 필요한 인터페이스를 사용하고 이를 hibernate가 구현한다.
+boot:spring-boot-starter-validation'를 의존성에 추가하면 위의 두개를 다 추가해준다.
 
+-- 추후 필요하면 다시 시청
+
+## 로그인 처리 - 쿠키, 세션
+
+### 패키지 구조 설계
+
+- 도메인
+
+  - 아이템
+  - 멤버
+  - 로그인
+
+- 웹
+  - 아이템
+  - 멤버
+  - 로그인
+
+위와 같은 구조일 때 도메인은 웹 패키지 아래 있는 아이템, 멤버, 로그인을 의존하면 안되고 웹 패키지만이 도메인에 있는 것들을 참조해야한다. 이러한 단방향 흐름은 코드를 쉽게 파악할 수 있게 할 뿐만이 아니라 web에 다른기술이 적용 될 때 도메인은 그대로 놔두고 갈아끼울 수 있는 장점이 있다.
+
+\*\* Option + Command + M 은 선택한 라인을 메소드로 뺄 수 있는 단축키
