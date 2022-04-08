@@ -50,6 +50,25 @@ List<WorldLocation> locations = new ArrayList<>();
 .getMap(locations.stream().toArray(WorldLocation[]::new));
 ```
 
+0408 업데이트.
+그냥 Array를 넘겨주면 됌 Object...를 너무 복잡하게 생각. 
+참조형형태의 iterator면 가능하다.
+
+```
+locations.stream().map(location -> location.toString).toArray()
+
+Set<String> redisKeys = template.keys("samplekey*"));
+// Store the keys in a List
+List<String> keysList = new ArrayList<>();
+Iterator<String> it = redisKeys.iterator();
+while (it.hasNext()) {
+       String data = it.next();
+       keysList.add(data);
+}
+
+```
+
+
 위와 같이 줌으로써 가능하다.
 <br/>
 <br/>
@@ -61,5 +80,6 @@ List<WorldLocation> locations = new ArrayList<>();
         https://www.codetd.com/ko/article/6517626
         https://stackoverflow.com/questions/16674023/proper-terminology-for-object-args
         https://stackoverflow.com/questions/9863742/how-to-pass-an-arraylist-to-a-varargs-method-parameter
+        https://stackoverflow.com/questions/19098079/how-to-get-all-keys-from-redis-using-redis-template
 
 <br/>
