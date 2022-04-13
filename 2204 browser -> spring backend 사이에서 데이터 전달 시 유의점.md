@@ -24,6 +24,7 @@ rules:
 
 - ajax의 dataType, contentType
 - 요청시 403 응답
+- 브라우저에서 json으로 array 보낼 시에
 
 <br/>
 
@@ -66,6 +67,27 @@ jQuery가 이것을 이용해 success나 done 함수의 파라미터로 받아 �
 
   session을 찾을 수 없는 문제를 확인하고 일단 시크릿창으로 열어보니 해결.
   웹 로그인시에만 발생하는데.. 정확한 원인 파악이 안됨
+
+<br/>
+<br/>
+<br/>
+
+        참조:
+        https://stackoverflow.com/questions/38004035/could-not-verify-the-provided-csrf-token-because-your-session-was-not-found-in-s
+
+<br/>
+
+## 개념: 브라우저에서 json으로 array 보낼 시에
+
+<br/>
+ ```
+ $.ajax({
+                    type: "put",
+                    dataType : "json",
+                    contentType: "application/json; charset=utf-8",
+                    url: ,
+                    data: JSON.stringify({ targets }),
+ ```
 
 <br/>
 <br/>
