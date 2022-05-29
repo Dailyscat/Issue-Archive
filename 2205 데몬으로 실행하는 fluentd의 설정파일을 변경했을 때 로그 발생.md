@@ -41,5 +41,6 @@ Warning: The unit file, source configuration file or drop-ins of fluentd changed
 <br/>
 
         참조:
+        https://pybo.kr/pybo/question/detail/551/
 
 <br/>
