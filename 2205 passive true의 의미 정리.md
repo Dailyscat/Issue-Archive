@@ -45,5 +45,7 @@ ios 12, 13에서 스크롤 이벤트 제어가 안되는 상황
         https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#improving_scrolling_performance_with_passive_listeners
         https://amati.io/eventlisteneroptions-passive-true/#:~:text=%7B%20passive%3Atrue%20%7D%20%EC%9D%98%20%EC%A7%84%EC%A0%95%ED%95%9C%20%EC%9D%98%EB%AF%B8%EB%8A%94%20%EC%9D%B4%EB%B2%A4%ED%8A%B8%EB%A5%BC%20%EB%B0%9B%EB%8A%94,%ED%9E%8C%ED%8A%B8%EB%A5%BC%20%EC%A3%BC%EB%8A%94%20%EA%B2%83%EC%9E%85%EB%8B%88%EB%8B%A4.
         https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=crazymonlong&logNo=221580029479
+        https://stackoverflow.com/questions/59193062/how-to-disable-scrolling-on-body-in-ios-13-safari-when-saved-as-pwa-to-the-home
+        https://stackoverflow.com/questions/16348031/disable-scrolling-when-touch-moving-certain-element
 
 <br/>
