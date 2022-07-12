@@ -59,8 +59,6 @@ es에 pagination 쿼리를 함께 넣어서 보낼 때 이슈 발생
 <br/>
 
         참조:
-        
-
         아래는 그냥 검색해봄.
         https://stackoverflow.com/questions/66414349/how-does-elasticsearch-7-track-total-hits-improve-query-speed
         https://stackoverflow.com/questions/66414349/how-does-elasticsearch-7-track-total-hits-improve-query-speed
