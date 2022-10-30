@@ -60,6 +60,21 @@ rules:
 --mount를 사용하여 Docker 호스트에 아직 존재하지 않는 파일 또는 디렉토리를 바인딩 마운트하면 Docker가 자동으로 생성하지 않지만 오류를 생성한다.
 
 
+#### Variable substitution
+
+```
+db:
+  image: "postgres:${POSTGRES_VERSION}"
+```
+
+compose는 실행되기전 image에 대해 확인하는데 POSTGRES_VERSION가 세팅 안되어 있다면 빈값이 들어간다. 혹은 이 값은 .env file에서도 가져올 수 있다.
+Compose가 프로젝트 디렉토리(Compose 파일의 상위 폴더)에서 자동으로 찾는 .env 파일을 사용하여 환경 변수의 기본값을 설정할 수 있다.
+셸 환경에 설정된 값은 .env 파일에 설정된 값보다 우선한다.
+.env 파일 기능은 docker-compose up 명령을 사용할 때만 작동하며 docker stack deploy에서는 작동하지 않는다.
+
+구성에 리터럴 달러 기호가 필요한 경우 $$(이중 달러 기호)를 사용할 수 있다. 이것은 또한 Compose가 값을 보간하는 것을 방지하므로 $$를 사용하면 Compose에서 처리하지 않으려는 환경 변수를 참조할 수 있다.
+
+
 
 <br/>
 <br/>
@@ -67,6 +82,7 @@ rules:
 
         참조:
         https://docs.docker.com/storage/bind-mounts/
+        https://docs.docker.com/compose/compose-file/compose-file-v3/#variable-substitution
 
 <br/>
 
