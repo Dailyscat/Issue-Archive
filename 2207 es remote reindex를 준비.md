@@ -39,6 +39,31 @@ rules:
       }
   }
 
+
+    "settings": {
+        "max_result_window" : 1000000 // note this
+    },
+    "mappings": {
+        "properties": {
+            "first_name": {
+                "type": "text"
+            },
+            "last_name": {
+                "type": "text"
+            },
+            "country": {
+                "type": "text"
+            },
+            "state": {
+                "type": "text"
+            },
+            "city": {
+                "type": "text"
+            }
+        }
+    }
+}
+
   ```
   1. 타겟 es의 remote.whitelist에 ip 추가.
   ex. reindex.remote.whitelist: "example.com:10200, wow.com:12312"
@@ -78,6 +103,31 @@ rules:
     }
     }
   ```
+
+wait_for_completion 옵션을 통해 reindex를 async하게 적용
+```
+POST _reindex?wait_for_completion=false
+{
+  "source": {
+    "remote": {
+      "host": "dns",
+      "username": "ㅂㅈㄷㅂ",
+      "password": "wow"
+    },
+    "index": "ㅋㅋㅋ"
+  },
+  "dest": {
+    "index": "ㅋㅋㅋ"
+  }
+}
+```
+
+위의 코드를 통해 리턴된 id를 아래 코드를 통해 완료되었는지 확인
+
+```
+GET _tasks/mIDQOYWmSqCvGVmEh6-5Hg:1494
+```
+
 <br/>
 <br/>
 <br/>
