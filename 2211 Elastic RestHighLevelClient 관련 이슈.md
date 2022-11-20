@@ -44,7 +44,9 @@ org.apache.http.ConnectionClosedException: method <init>()V not found
 If your project is using both httpcore and httpcore-nio dependencies, ensure that both of their versions are either simultaneously <= 4.4.10 or > 4.4.10.
 ```
 
-4.4.12로 변경
+https://mvnrepository.com/artifact/org.elasticsearch.client/elasticsearch-rest-client/7.10.2
+해당 사이트에서 es client가 필요로 하는 디펜던시를 확인할 수 있음.
+위를 따라서 4.4.12로 변경
 
 <br/>
 <br/>
