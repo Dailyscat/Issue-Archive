@@ -23,6 +23,7 @@ rules:
 ## 알게된 부분 정리:
 
 - 기본적으로 테스트 실패 스크린샷과 비디오가 archive 되기 때문에 기본 설정 끄는게 좋다.
+- circleci cron tab */5 같은 표현식 안됨.
 
 <br/>
 
@@ -46,14 +47,22 @@ rules:
 
 <br/>
 
-## 개념:
+## 개념: circleci cron tab */5 같은 표현식 안됨.
 
 <br/>
-  개념에 대한 내용
+
+
+  
+```
+Note: Cron step syntax (for example, */1, */20) is not supported. Range elements within comma-separated lists of elements are also not supported. In addition, range elements for days (for example, Tue-Sat) is not supported. Use comma-separated digits instead.
+```
+
+
 <br/>
 <br/>
 <br/>
 
         참조:
+        https://circleci.com/docs/workflows/#specifying-a-valid-schedule
 
 <br/>
