@@ -50,7 +50,8 @@ rules:
             npm run cypress --spec ${TEST_FILES//$'\n'/','}
     ```
 
-
+local circle ci test
+https://circleci.com/blog/local-pipeline-development/
 
 <br/>
 <br/>
