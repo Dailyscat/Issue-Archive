@@ -57,6 +57,7 @@ rules:
 <br/>
 
         참조:
+        https://glebbahmutov.com/blog/parallel-or-not/
         https://docs.cypress.io/guides/continuous-integration/circleci#Additional-Examples
         https://enrq.me/dev/2021/10/04/cypress-parallel-in-circleci/
         https://github.com/artsy/force/blob/main/.circleci/config.yml#L219-L235
