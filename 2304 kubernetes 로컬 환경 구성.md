@@ -58,6 +58,11 @@ rules:
 	helm을 통해 만들어진 template에 맞는 namespace 생성
 		kubectl create namespace test_wow
 
+	ingress 사용시
+		minikube addons enable ingress
+		kubectl get pods -n ingress-nginx
+	https://kubernetes.io/ko/docs/tasks/access-application-cluster/ingress-minikube/
+
 	istio를 사용한다면 아래 주소 확인하여 prerequisites 부터 시작
 	https://istio.io/latest/docs/setup/install/helm/#prerequisites
 	이때 helm install istiod istio/istiod -n istio-system --wait 해당 명령어가 아래 주소와 같은 에러를 발생시킬 수 있음
