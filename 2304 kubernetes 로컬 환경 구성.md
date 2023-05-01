@@ -72,6 +72,7 @@ rules:
 		kubectl get nodes --show-labels
 		minikube node add test
 		kubectl label nodes node1 type=test
+	https://stackoverflow.com/questions/60166842/pod-is-in-pending-stage-error-failedscheduling-nodes-didnt-match-node-sel
 
 	helm을 통해 만들어진 template을 사용해서 cluster에 배포
 		kubectl apply -f ./~~.yaml
