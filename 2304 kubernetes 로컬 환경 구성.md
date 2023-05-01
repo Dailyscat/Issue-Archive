@@ -69,6 +69,7 @@ rules:
 	딱히 문제가 발생하진 않으니 skip해도 됨.
 
 	template이 nodeSelector: type: "test" 를 쓴다면 클러스터에 node를 추가해줘야한다.
+		kubectl get nodes --show-labels
 		minikube node add test
 		kubectl label nodes node1 type=test
 
