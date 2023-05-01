@@ -68,6 +68,10 @@ rules:
 	https://github.com/istio/istio/issues/22677
 	딱히 문제가 발생하진 않으니 skip해도 됨.
 
+	template이 nodeSelector: type: "test" 를 쓴다면 클러스터에 node를 추가해줘야한다.
+		minikube node add test
+		kubectl label nodes node1 type=test
+
 	helm을 통해 만들어진 template을 사용해서 cluster에 배포
 		kubectl apply -f ./~~.yaml
 
