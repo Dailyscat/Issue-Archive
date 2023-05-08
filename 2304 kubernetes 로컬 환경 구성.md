@@ -28,11 +28,11 @@ rules:
 ## 개념:
 
 <br/>
-  kubectl 설치
-    brew install kubectl
+	kubectl 설치
+	brew install kubectl
 
-  minikube 설치
-    https://kubernetes.io/ko/docs/tutorials/hello-minikube/
+	minikube 설치
+	https://kubernetes.io/ko/docs/tutorials/hello-minikube/
 
 	특정 터미널에서만 환경변수 설정
 		export TEST_WOW=abc
