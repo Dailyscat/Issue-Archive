@@ -41,6 +41,8 @@ rules:
 		kubectl config get-contexts
 	원하는 kube 클러스터 사용.
 		kubectl config use-context minikube
+	type=ab인 node 확인
+		kubectl get nodes -l type=ab
 
 	minikube 클러스터 사용
 		minikube start
