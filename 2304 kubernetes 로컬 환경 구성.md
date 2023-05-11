@@ -28,11 +28,11 @@ rules:
 ## 개념:
 
 <br/>
-  kubectl 설치
-    brew install kubectl
+	kubectl 설치
+	brew install kubectl
 
-  minikube 설치
-    https://kubernetes.io/ko/docs/tutorials/hello-minikube/
+	minikube 설치
+	https://kubernetes.io/ko/docs/tutorials/hello-minikube/
 
 	특정 터미널에서만 환경변수 설정
 		export TEST_WOW=abc
@@ -41,6 +41,8 @@ rules:
 		kubectl config get-contexts
 	원하는 kube 클러스터 사용.
 		kubectl config use-context minikube
+	type=ab인 node 확인
+		kubectl get nodes -l type=ab
 
 	minikube 클러스터 사용
 		minikube start
