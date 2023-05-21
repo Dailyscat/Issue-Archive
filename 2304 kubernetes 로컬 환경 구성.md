@@ -102,6 +102,11 @@ rules:
 		kubectl port-forward -n test_wow deployment/test_wow-v1 3000:3000
 		https://stackoverflow.com/questions/75682427/probes-in-k8s-failed-with-404
 
+	kubernetes 클러스터 내에 실행되는 pod에 들어가서 명령어 입력하고 싶을 때.
+		kubectl describe pod -n front-alpha front-ui-alpha-v1-dd4bbbbf9-jqgfj 하고 나온 출력에서 Containers:에 매핑된 키값 찾기.
+
+		kubectl exec -n front-alpha(네임스페이스) -it front-ui-alpha-v1-dd4bbbbf9-jqgfj(팟) -c front-ui(컨테이너) -- sh
+
 <br/>
 <br/>
 <br/>
