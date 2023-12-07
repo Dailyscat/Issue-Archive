@@ -36,7 +36,6 @@ Reactive Redis는 Non-blocking I/O에 비동기로 동작해야 하는데 Non-bl
 
 BlockHound는 blocking 코드를 찾아 주는 라이브러리 Reactor-core 3.3부터 내장되어 있고 blocking으로 가장 대표적인 메서드는 block, blockFirst, blockLast같은 메서드들이 있다. BlockHound는 이렇게 런타임에서 확인할 수도 있지만, 보통은 테스트 케이스를 작성할 때 사용하고, 테스트케이스 대상 코드에 blocking 코드가 안에 있는 지, 없는지 확인하는데 매우 유용
 
-publishOn()은 메서드 체인 중간에 특정 메서드 체인을 별도의 스레드 풀에서 실행하고 싶을 때 사용한다. 반면, subscribeOn()은 전체 메서드 체인을 별도의 스레드 풀에서 실행한다. 블로킹 동기 코드를 별도의 스레드 풀에서 실행하기 위해 publishOn() 메서드가 사용되며, 이는 Schedulers.boundedElastic()를 통해 전달된 스레드 풀에서 실행된다.
 <br/>
 <br/>
 <br/>
