@@ -81,6 +81,22 @@ echo $password | sudo -S [임의의 명령]
 echo 'your_password' | sudo -S abc
 ```
 
+```
+# Nginx가 실행 중인지 확인합니다.
+if pgrep nginx >/dev/null 2>&1; then
+  echo "Nginx is running."
+  # Nginx가 실행 중일 때 실행할 명령어를 여기에 추가합니다.
+  # 예: echo "Running a backup script"
+else
+  echo "Nginx is not running."
+  # Nginx가 실행 중이지 않을 때 실행할 명령어를 여기에 추가합니다.
+  # 예: sudo service nginx start
+fi
+
+pgrep 명령은 시스템에서 실행 중인 프로세스 중 nginx라는 이름을 찾고, 찾으면 0을 반환
+```
+
+
 <br/>
 <br/>
 <br/>
