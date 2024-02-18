@@ -183,3 +183,30 @@ GET data/_search
         참조:
 
 <br/>
+
+## 개념: 필터를 통한 삭제
+
+```
+POST /test/_delete_by_query
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "division": "원하는값"
+          }
+        },
+        {
+          "range": {
+            "count": {
+              "gt": 4800
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+
+```
