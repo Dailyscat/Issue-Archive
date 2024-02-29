@@ -60,7 +60,6 @@ redis insight에서 1m이 넘어가는 데이터는 scan으로 찾기 힘들다.
 <br/>
 
         참조:
-        https://line-enterprise.slack.com/archives/CE7R095RQ/p1639036727237900?thread_ts=1639034486.232000&cid=CE7R095RQ
 
 <br/>
 
