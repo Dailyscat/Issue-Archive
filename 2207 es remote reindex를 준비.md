@@ -32,13 +32,6 @@ rules:
   0. 인덱스 세팅
   ```
   PUT template_data {
-      "mappings" : {
-          "templatedata" : {
-              ....
-          }
-      }
-  }
-
 
     "settings": {
         "max_result_window" : 1000000 // note this
