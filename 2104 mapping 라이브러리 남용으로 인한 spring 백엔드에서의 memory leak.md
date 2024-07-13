@@ -77,6 +77,28 @@ at com.linecorp.lcp.front.apps.converter.CategoryConverter.convert(CategoryConve
 
 로컬 -> 게이트웨이 -> 원격서버로 되어있기 때문에 2단계를 통해 덤프를 받았다.
 
+
+
+```
+
+1. 로컬에서 원격으로 (Local→Remote)
+> scp [전송할 파일 경로] [유저명]@[IP주소]:[받을 경로]
+
+EX) 로컬의 /home/example.txt 파일을 원격지의 /home/test 디렉토리로 전송
+> scp /home/example.txt dhj@141.211.xx.xxx:/home/test
+2. 원격에서 로컬로 (Remote→Local)
+> scp [유저명]@[IP주소]:[전송할 파일 경로] [받을 경로]
+
+EX) 원격지의 /home/test.txt 파일을 로컬의 /home/example 디렉토리로 전송
+> scp dhj@141.211.xx.xxx:/home/test.txt /home/example
+3. 원격에서 원격으로 (Remote→Remote)
+> scp [유저명]@[IP주소]:[전송할 파일 경로] [유저명]@[IP주소]:[받을 경로]
+
+EX) A 원격지의 /home/test.txt 파일을 B 원격지의 /home/example 디렉토리로 전송
+> scp dhj@141.211.xx.xxx:/home/test.txt gildong@141.223.xx.xxx:/home/example
+
+```
+
 <br/>
 
 <br/>
