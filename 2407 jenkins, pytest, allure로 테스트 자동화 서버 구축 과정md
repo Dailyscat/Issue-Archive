@@ -1,0 +1,130 @@
+<!--
+author: Dailyscat
+purpose: issue arrange
+rules:
+ (1) 헤더와 문단사이
+    <br/>
+    <br/>
+ (2) 코드가 작성되는 부분은 >로 정리
+ (3) 참조는 해당 내용 바로 아래
+    <br/>
+    <br/>
+ (4) 명령어는 bold
+ (5) 방안은 ## 안의 과정은 ###
+-->
+
+# Issue: jenkins, pytest, allure로 테스트 자동화 서버 구축 과정
+
+## 상황:
+
+
+<br/>
+
+## 알게된 부분 정리:
+
+- chrome web driver 관련 이슈
+- jenkins에서 pytest, allure 실행
+
+<br/>
+
+## 개념: chrome web driver 관련 이슈
+
+<br/>
+
+```
+AttributeError: 'NoneType' object has no attribute 'split'
+```
+
+해당 이슈가 계속 떠서 이것저것 해봤는데 다 안됨.
+
+sudo apt install chromium 으로 직접 받아서 됐다는 얘기를 보고 혹시나해서 yum install chromium 시도해보니 성공.
+
+rocky linux 였는데 리눅스 배포판에서 발생하는 이슈인것도 같고.. 암튼 한시간정도 헤맸다.
+
+<br/>
+<br/>
+<br/>
+
+        참조:
+        https://github.com/SergeyPirogov/webdriver_manager/issues/649
+
+<br/>
+
+## 개념: jenkins에서 pytest, allure 실행
+
+<br/>
+
+git repo 접근시에 token으로 credential 만들어줘야 접근가능.
+![크레덴셜](/image/jenkins_credential.png)
+
+```
+Kind는 Username with password 를 선택해주시면 됩니다
+Username 은 본인의 깃허브 아이디를 선택해주시면 됩니다
+Password는 이전에 발급받은 Github Token 값을 복사해주시면 됩니다
+ID값은 원하는 값으로 설정해주시면 되며, git 이 jenkins에게 Credential을 줄 때 인식할 수 있도록 합니다
+```
+
+회사 vm이 만들어질 때 특정 권한에 따라 사용자가 만들어지고 각 사용자 홈이 생겨서 사용자로 접근한 다음에 바이너리를 설치해도 jenkins에서 이에 접근하지를 못함.
+
+PATH도 설정해보고 해봤는데 접근을 아예 못함. 아마 서버자체가 생성될 때 어떤 조치가 있는듯.
+https://stackoverflow.com/questions/46199123/command-not-found-from-jenkins-execute-shell
+https://junhyunny.github.io/information/jenkins/jenkins-path-envrionment-varaible/
+https://stackoverflow.com/questions/10625259/how-to-set-environment-variables-in-jenkins
+
+다행히 python은 global로 실행이 가능해서 python -m 을 통해서 관련 의존성 설치하고 실행함.
+https://github.com/Rustam-Z/jenkins-pytest-github
+
+python으로 테스트까진 실행했는데 allure를 또 접근을 못해서 어떻게 할까 하니까 jenkins에서 allure 플러그인을 제공해서 실행.
+https://qaautomation.expert/2023/10/09/integration-of-allure-report-with-jenkins/
+
+jenkins slack notification으로 알림 받으려고 했는데 회사 규정상 공용 슬랙 토큰 만들어서 젠킨스에 웹훅 만드는게 또 시간 좀 걸려보여서 slack webhook url은 바로 발급이 돼서 그걸로 curl 날림.
+
+아래 처럼 했는데
+이때 테스트 결과 중에 실패하나 있으면 아예 jenkins가 실패로 처리하고 curl을 또 안날려서
+set +e 처리를 통해서 일단 통과하도록 설정하고 post 요청 날린 후에야 끝나도록 설정.
+
+여기에 또 excuteShell에서 해서 그런지 EOF >> {} json 날려서 이쁘게 formatting 해보려고 했는데 
+제대로 되지 않음; 그냥 줄바꿈으로 처리해서 명확하게 보이게만 처리해놨다.
+
+여기엔 또 allure를 플러그인으로 쓰니까 관련 value를 받고 싶었는데 어떻게 할까 고민하다가
+failed_tests=$(find allure-results -name "*.json" -exec grep -l '"status": "failed"' {} + | wc -l)
+이런 방식으로 grep로 상태 확인해서 fail, error 카운트 받아서 처리.
+
+
+```
+
+set +e 
+python -m pytest TEST_MWEB --environment=Beta
+pytest_exit_code=$? 
+set -e
+
+# 실패한 테스트 개수 추출
+failed_tests=$(find allure-results -name "*.json" -exec grep -l '"status": "failed"' {} + | wc -l)
+
+# 오류 테스트 개수 추출
+error_tests=$(find allure-results -name "*.json" -exec grep -l '"status": "error"' {} + | wc -l)
+
+# Jenkins 빌드 번호 및 URL
+build_number=$BUILD_NUMBER
+jenkins_url="http://auto:8080/job/BETA_TEST/$build_number/console"
+allure_url="http://auto:8080/job/BETA_TEST/$build_number/allure/"
+project_name=$JOB_NAME
+
+# Slack 메시지 전송
+slack_webhook_url="https://webhook.com"
+slack_message="Project: $project_name\nBuild #$build_number Report\nFailed Tests: $failed_tests\nError Tests: $error_tests\nJenkins URL: $jenkins_url\nAllure Report: $allure_url"
+
+curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"$slack_message\"}" $slack_webhook_url
+
+exit $pytest_exit_code
+```
+
+
+<br/>
+<br/>
+<br/>
+
+        참조:
+        https://velog.io/@zzarbttoo/JenkinsGit-%EC%97%B0%EB%8F%99%ED%95%98%EA%B8%B0Git-Token-%EB%B0%9C%EA%B8%89-Jenkins-Credential-%EB%93%B1%EB%A1%9D
+
+<br/>
