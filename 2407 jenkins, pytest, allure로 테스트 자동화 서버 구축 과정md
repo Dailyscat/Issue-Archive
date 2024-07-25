@@ -53,6 +53,21 @@ rocky linux 였는데 리눅스 배포판에서 발생하는 이슈인것도 같
 ## 개념: jenkins에서 pytest, allure 실행
 
 <br/>
+서버에 jenkins 설치
+https://www.jenkins.io/doc/book/installing/linux/#red-hat-centos
+
+```
+7  2024-07-25_10:41:10\ sudo wget -O /etc/yum.repos.d/jenkins.repo     https://pkg.jenkins.io/redhat-stable/jenkins.repo
+    8  2024-07-25_10:41:15\ sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+    9  2024-07-25_10:41:24\ sudo yum upgrade
+   10  2024-07-25_10:45:42\ sudo yum install fontconfig java-17-openjdk
+   11  2024-07-25_10:47:13\ sudo yum install jenkins
+   12  2024-07-25_10:48:42\ sudo systemctl daemon-reload
+   13  2024-07-25_10:48:53\ sudo systemctl enable jenkins
+21  2024-07-25_10:50:07\ sudo systemctl start jenkins
+33  2024-07-25_11:22:52\ sudo yum install chromium.x86_64
+```
+
 
 git repo 접근시에 token으로 credential 만들어줘야 접근가능.
 ![크레덴셜](/image/jenkins_credential.png)
@@ -92,6 +107,12 @@ failed_tests=$(find allure-results -name "*.json" -exec grep -l '"status": "fail
 
 
 ```
+
+pip3 install -U pytest
+pip3 install pytest-cov pytest-html
+pip3 install selenium
+pip3 install webdriver_manager
+pip3 install allure-pytest
 
 set +e 
 python -m pytest TEST_MWEB --environment=Beta
