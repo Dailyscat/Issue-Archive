@@ -16,6 +16,7 @@ rules:
 # Issue: Query data cannot be undefined. Please make sure to return a value other than undefined from your query function. Affected query key
 
 ## 상황:
+
 서버 컴포넌트 페이지를 기반으로 trpc 적용하여 작업하는데에서 자꾸 위 에러 발생
 <br/>
 
@@ -39,14 +40,19 @@ rules:
           );
     ```
 
-    여기서 자꾸 Query data cannot be undefined.가 나서 이것 저것 별거 다 해보다가 
+    여기서 자꾸 Query data cannot be undefined.가 나서 이것 저것 별거 다 해보다가
     혹시나해서 prefetch 하는 부분 지우고 해보니 에러 안나와서 이것저것 보다가
     void 없애고 await하니까 제대로 작동 ㅠㅠ
+
 <br/>
 <br/>
 <br/>
 
         참조:
+        https://1ncomparable.tistory.com/455
+        https://velog.io/@jh100m1/react-query-%EC%97%90%EB%9F%AC-Query-data-cannot-be-undefined.-Please-make-sure-to-return-a-value-other-than-undefined-from-your-query-function.-Affected-query-key
+        https://velog.io/@qhflrnfl4324/Query-data-cannot-be-undefined-React-Query
+        https://velog.io/@jh100m1/react-query-%EC%97%90%EB%9F%AC-Query-data-cannot-be-undefined.-Please-make-sure-to-return-a-value-other-than-undefined-from-your-query-function.-Affected-query-key
 
 <br/>
 
