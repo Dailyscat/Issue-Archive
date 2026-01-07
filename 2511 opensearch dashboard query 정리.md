@@ -1,0 +1,235 @@
+<!--
+author: Dailyscat
+purpose: issue arrange
+rules:
+ (1) 헤더와 문단사이
+    <br/>
+    <br/>
+ (2) 코드가 작성되는 부분은 >로 정리
+ (3) 참조는 해당 내용 바로 아래
+    <br/>
+    <br/>
+ (4) 명령어는 bold
+ (5) 방안은 ## 안의 과정은 ###
+-->
+
+# Issue:
+
+<br/>
+<br/>
+
+트래픽 피크 시점에 MSA 쪽 slow query / 오류율은 크게 안 올랐는데, 프론트 서버 쪽에서 CPU, thread count, 응답 속도가 같이 치솟는 현상 발생.
+RestTemplate + HttpClient 커넥션 풀에 `connectionRequestTimeout` 미설정 상태라, 커넥션 풀 고갈 이후 요청들이 풀 앞에서 무기한 대기하면서 서블릿 스레드를 계속 점유하는 구조로 추정.
+
+<br/>
+<br/>
+
+## 상황:
+
+<br/>
+<br/>
+
+- 프론트에서 다수의 동기식 MSA 호출 사용
+
+  - `RestTemplate` 기반 동기 호출 다수
+  - WebClient도 대부분 `block()`으로 동기로 사용
+
+- HttpClient 커넥션 풀 설정
+
+  - `maxTotalConnections = 1000`
+  - `maxConnectionsPerRoute = 100`
+  - `connectTimeout = 3000ms`
+  - `socketTimeout = 5000ms`
+  - **`connectionRequestTimeout` 미설정**
+
+- 트래픽이 몰리면서 특정 MSA 라우트에 동시 요청이 많이 들어가면
+
+  - 라우트당 100개 커넥션이 꽉 찜
+  - 101번째 이후 요청부터는 풀에서 커넥션 얻으려고 **무기한 대기**
+  - 그 대기 동안 톰캣 서블릿 스레드도 같이 묶여 있음
+
+- 이게 반복되면서
+
+  - 서블릿 스레드 수 점점 증가
+  - 스레드 수 ↑ → 컨텍스트 스위칭, 락 경합, GC 부담 ↑ → CPU 사용률 ↑
+  - 처리 속도(서비스율)가 실제로 느려지면서 대기열이 더 빨리 쌓이고 응답 속도도 계속 느려지는 악순환
+
+<br/>
+<br/>
+
+## 생각해낸 방안:
+
+<br/>
+<br/>
+
+- HttpClient 커넥션 풀에 **`connectionRequestTimeout` 짧게 설정**해서 풀 앞 대기 시간 상한 두기
+- 도메인별로 **`socketTimeout` 단축**, 중요/비중요 API 구분해서 타임아웃/디그레이드 전략 분리
+- 읽기 위주의 MSA 호출에 **캐시 확대**해서 피크 시 외부 호출 수 자체 줄이기
+- 부가 기능(API)에는 **fail-fast + fallback** 적용해서 핵심 기능 보호
+- (중기) WebClient 비동기/병렬 호출, 서킷브레이커/버크헤드 도입 검토
+
+<br/>
+<br/>
+
+## 방안:
+
+<br/>
+<br/>
+
+### 1) HttpClient `connectionRequestTimeout` 추가 (가장 먼저)
+
+<br/>
+<br/>
+
+- 목표
+
+  - 커넥션 풀이 꽉 찼을 때, **커넥션을 빌리려고 무한 대기하는 요청**을 빨리 잘라내기
+  - 서블릿 스레드가 커넥션 풀 앞에서 오래 묶이지 않도록 해서 CPU/스레드 폭증 완화
+
+- 변경 방향 (예시 값)
+
+  - `connectionRequestTimeout = 200~300ms` 수준으로 시작
+  - 200~300ms 안에 커넥션을 못 얻으면 **바로 예외** 발생 → 해당 요청은 빠르게 실패
+  - 이미 커넥션을 잡고 처리 중인 요청(기존 유저)은 그대로 진행됨 (끊지 않음)
+
+- 코드 (예시)
+
+> HttpComponentsClientFactory.java
+>
+> ```java
+> private static final int DEFAULT_CONNECTION_REQUEST_TIMEOUT_MILLISECONDS = 200;
+> private int connectionRequestTimeout = DEFAULT_CONNECTION_REQUEST_TIMEOUT_MILLISECONDS;
+>
+> public void setConnectionRequestTimeout(int connectionRequestTimeout) {
+>     this.connectionRequestTimeout = connectionRequestTimeout;
+> }
+>
+> public HttpClient getObject() {
+>     PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
+>     connectionManager.setMaxTotal(this.maxTotalConnections);
+>     connectionManager.setDefaultMaxPerRoute(this.maxConnectionsPerRoute);
+>
+>     RequestConfig requestConfig = RequestConfig.custom()
+>         .setConnectTimeout(this.connectTimeout)
+>         .setSocketTimeout(this.socketTimeout)
+>         .setConnectionRequestTimeout(this.connectionRequestTimeout)
+>         .setStaleConnectionCheckEnabled(this.staleConnectionCheck)
+>         .build();
+>
+>     this.httpClient = HttpClients.custom()
+>         .setConnectionManager(connectionManager)
+>         .setDefaultRequestConfig(requestConfig)
+>         .setRetryHandler(this.retryHandler)
+>         .build();
+>     return this.httpClient;
+> }
+> ```
+>
+> spring-root-context.xml
+>
+> ```xml
+> <property name="connectionRequestTimeout" value="200"/>
+> ```
+
+<br/>
+<br/>
+
+### 2) `socketTimeout` 재조정 (도메인별로)
+
+<br/>
+<br/>
+
+- 현재 5000ms로 다소 긴 편
+
+  - 백엔드가 느려졌을 때, 5초 동안 서블릿 스레드가 계속 묶여 있게 됨
+
+- 후보
+
+  - 핵심 기능: 2000~3000ms
+  - 부가 기능(추천, 배너, 알림 등): 500~1500ms 수준으로 더 공격적으로
+
+- 효과
+
+  - **느려진 MSA에 발목 잡히는 시간을 줄이고**, 느리면 빨리 실패 → 디그레이드 / fallback 로직으로 전환
+
+> 서비스 코드 레벨에서 `RestClientException` 잡아서
+> 부가 기능은 빈 리스트/기본값/캐시된 결과로 대체하는 패턴 적용
+
+<br/>
+<br/>
+
+### 3) 캐싱 확대 (읽기 위주 MSA 호출)
+
+<br/>
+<br/>
+
+- 이미 템플릿/일부 도메인에서 `@Cacheable` 사용 중
+- 같은 패턴을 아래 후보들에 확장 검토
+
+  - 카테고리/메뉴 구조
+  - 검색 자동완성/인기 키워드
+  - 프로모션/혜택/배너
+  - 공지/알림 등
+
+- 캐시 TTL
+
+  - 수초~수분 단위로 가져가도 비즈니스상 문제 없는 것부터 적용
+
+- 효과
+
+  - 피크 시점에 **외부 MSA 호출 수 자체를 줄여서** 커넥션 풀 포화 가능성 낮추기
+
+<br/>
+<br/>
+
+### 4) 부가 기능에 fail-fast + 디그레이드 적용
+
+<br/>
+<br/>
+
+- 필수/부가 기능 구분
+
+  - 필수: 없으면 서비스가 성립 안 되는 정보
+  - 부가: 추천, 배너, 알림 등 없어도 코어 플로우는 가능한 부분
+
+- 부가 기능 MSA 호출은
+
+  - `connectionRequestTimeout`, `socketTimeout` 더 짧게
+  - 예외 발생 시 **로그 + fallback** 후, 전체 API는 200 응답 유지
+
+- 이걸 통해
+
+  - 트래픽 피크 시에도 **검색/주문 등 핵심 플로우를 최대한 살리는 방향**
+
+<br/>
+<br/>
+
+### 5) (중기) 구조 개선: 비동기/서킷브레이커
+
+<br/>
+<br/>
+
+- WebClient를 진짜 리액티브로 쓰거나, 최소한 **병렬 호출**로 전환
+
+  - 여러 MSA를 순차 호출하지 않고 동시에 호출해서 전체 응답시간 단축
+
+- Resilience4j 등으로
+
+  - 서킷브레이커: 특정 MSA 에러율/지연이 높을 때 회로 open → 바로 fallback
+  - 버크헤드: 중요/비중요 도메인 별도 풀로 격리해서 전파 방지
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+```
+    참조:
+```
+
+<br/>
+
+- APM / 모니터링에서 확인한 프론트 CPU/스레드/응답시간 추이
+- MSA 쪽 slow query / 응답시간 지표 (증가 없음)
+- HttpClient 설정 (maxTotal/maxPerRoute, connectTimeout, socketTimeout, connectionRequestTimeout 미설정)
+- Tomcat 스레드/커넥션/큐 관련 설정 (별도 정리 필요 시 추가)
