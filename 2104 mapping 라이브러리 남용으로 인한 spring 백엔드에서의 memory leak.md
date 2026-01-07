@@ -66,9 +66,8 @@ less a.txt
 "catalina-exec-98" #228 daemon prio=5 os_prio=0 tid=0x00007f2ec9641000 nid=0xf1c5 waiting for monitor entry [0x00007f2c150c7000]
 java.lang.Thread.State: BLOCKED (on object monitor)
 ...
-at com.linecorp.lcp.front.apps.converter.CategoryConverter.convert(CategoryConverter.java:50)
+at com......CategoryConverter.convert(CategoryConverter.java:50)
 ```
-
 
 ```
 원격 서버에서 scp 권한@테스트서버:/덤프 파일 위치 /내 게이트웨이의 위치
@@ -76,8 +75,6 @@ at com.linecorp.lcp.front.apps.converter.CategoryConverter.convert(CategoryConve
 ```
 
 로컬 -> 게이트웨이 -> 원격서버로 되어있기 때문에 2단계를 통해 덤프를 받았다.
-
-
 
 ```
 
@@ -118,6 +115,7 @@ EX) A 원격지의 /home/test.txt 파일을 B 원격지의 /home/example 디렉�
 MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
 mapperFactory.classMap(Category.class, FrontCategory.class)
 ```
+
 api에서 응답으로 오는 dto와 프론트에서 사용하는 vo가 달라서 매핑이 필요하여 들어있는 로직인데 기존에 위와 같이 되어 있는 부분을 아래와 같이 바꾸었다.
 
 ```
@@ -127,7 +125,6 @@ FrontCategory frontCategory = new FrontCategory();
 처음에는 mapperFactory를 final로 convert 함수 밖에 선언하여서 해결을해야하나 생각을 했는데, 이밖에도 mapperFactory.classMap().byDefault().register() 과정에서 runtime 시점에 reflection을 통해 맵핑을 하므로 만오천건을 전부 매핑하면서 cpu 사용량을 폭발적으로 증가시킨것이었다.
 
 api에 대해 제대로 알아보지 않고 우아하게 처리하려다보니 큰코다쳤다.
-
 
 성능비교 Map Struct가 압도적으로 좋다.
 MapStruct의 성능이 우수한 이유는 Lombok과 같이 annotation processor를 통해서 compile 시점에 객체간 맵핑이 이루어지기 떄문에 매우 월등한 성능을 보일 수 있다.
